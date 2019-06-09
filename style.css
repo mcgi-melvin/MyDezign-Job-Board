@@ -1,0 +1,244 @@
+/*
+  Theme Name: MyDezign Job Board
+  Theme URI: #
+  Author: Melvin Lomibao
+  Author URI: https://trendyfashify.tk/
+  Description: It's a free to use job board theme
+  Version: 1.0
+  License: GNU General Public License v2 or later
+  License URI: http://www.gnu.org/licenses/gpl-2.0.html
+  Text Domain: mydezignjobboard
+  Tags: one-column, two-columns, right-sidebar, flexible-header, accessibility-ready, custom-colors, custom-header, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready
+*/
+
+/* header style */
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+body{
+  font-family: 'Roboto', sans-serif !important;
+}
+
+h1,h2,h3,h4,h5{
+  color: #456672 !important;
+}
+
+ul{
+  margin: 0 !important;
+}
+
+li.menu-item{
+  display: inline-block;
+  margin: 10px;
+}
+
+li.menu-item:hover {
+  border-bottom: 2px solid white;
+  transition: border 0.3s ease;
+}
+
+li.menu-item a{
+  color: white;
+  text-decoration: none;
+}
+
+.current_page_item{
+  border-bottom: 2px solid white;
+}
+
+.top-action-btn {
+  background-image: linear-gradient(to right, #456672, #6c97a7);
+  color: white !important;
+  padding: 5px;
+  box-shadow: 0px 0px 2px black;
+  text-decoration: none !important;
+  transition: all 1.5s ease;
+  font-size: 14px;
+}
+
+.top-action-btn:hover{
+  background-image: linear-gradient(to left, #456672, #6c97a7);
+}
+
+ul.social-icons{
+  padding-left: 0;
+}
+
+.social-icons li{
+  display: inline-block;
+  margin: 0 2px;
+}
+
+.top-icon li a {
+  color: #314357;
+  font-size: 20px;
+}
+
+/* end header style */
+
+/* SINGLE CSS */
+
+.single-wrapper{
+  margin: 50px 30px;
+}
+
+@media only screen and (max-width: 480px) {
+  .single-wrapper{
+    margin: 20px 5px;
+  }
+}
+
+.application_button{
+  background-image: linear-gradient(#456672,#3399cc);
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.single-container, .single-sidebar{
+  box-shadow: 0px 0px 3px #456672;
+  padding: 20px;
+  width: 100%;
+}
+
+#sidebar ul h2 {
+  border-bottom: 1px solid #456672;
+  color: #456672;
+}
+
+/* END SINGLE CSS */
+
+/* JOB DASHBOARD CSS */
+
+#job-manager-job-dashboard{
+  background-color: #456672;
+  margin: 30px 0;
+  padding: 10px;
+  color: white;
+  box-shadow: -1px 2px 3px black;
+}
+
+.job-dashboard-job-title{
+  text-decoration: none !important;
+}
+
+/* END JOBDASHBOARD CSS */
+
+/* JOB LIST CSS */
+
+.mobile-company-name{
+  font-size: 12px;
+}
+
+/* END JOB LIST CSS */
+
+
+
+/* USEFUL CSS */
+
+.custom-v-align {
+  display: block;
+  margin: auto 0;
+}
+
+.fs-14{
+  font-size: 14px;
+}
+
+.display_none{
+  display: none;
+}
+
+@media only screen and (min-width: 480px){
+  .index-main{
+    padding: 20px 30px;
+  }
+}
+
+
+/* END USEFUL CSS */
+
+/* OVERRIDE CSS */
+
+@media only screen and (max-width: 480px){
+  table.job-manager-jobs{
+    table-layout: fixed;
+  }
+}
+
+p{
+  margin-bottom: 0 !important;
+}
+
+.search_jobs{
+    background-color: #456672;
+}
+
+.job_types{
+  background-color: #456672 !important;
+  color: white;
+}
+
+.woocommerce .col-1,.woocommerce .col-2{
+  max-width:none;
+}
+
+#sidebar ul{
+  list-style-type: none;
+  padding: 0;
+}
+
+/* END OVERRIDE CSS */
+
+/* MOBILE NAV CSS */
+
+.mobile-nav span{
+  padding: 4px 6px;
+  border-radius: 3px;
+  background: #fff;
+}
+
+#mobile-nav{
+  color: #456672;
+}
+
+.nav-overlay{
+  background-color: #ffffffde;
+  height: 100vh;
+  width: 0%;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 9999;
+  transition: all 1s ease;
+  visibility: hidden;
+}
+
+.mobile-nav-close{
+  top: 10px;
+  position: absolute;
+  right: 15px;
+  font-size: 25px;
+}
+
+#mobile-nav-menu{
+  transform: translate(-60%, 0);
+  top: 10%;
+  position: absolute;
+  left: 50%;
+  text-align: center;
+  font-weight: 900;
+}
+
+#mobile-nav-menu li{
+  list-style-type: none;
+}
+
+#mobile-nav-menu li a{
+  color: #456672;
+}
+
+#mobile-nav-menu .current_page_item{
+  border-bottom: 2px solid #456672;
+}
+
+/* END MOBILE NAV CSS */

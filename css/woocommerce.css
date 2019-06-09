@@ -1,0 +1,155 @@
+/* WOOCOMMERCE CSS */
+
+a{
+  text-decoration: none !important;
+}
+
+.woocommerce-loop-product__title{
+  font-size: 18px;
+}
+
+ul.products{
+  padding: 0;
+}
+
+ul.products li{
+  display: inline-block;
+  margin: 10px;
+}
+
+li.product{
+  box-shadow: 0px 0px 1px #456672;
+  padding: 20px;
+}
+
+.product .button{
+  background-image: linear-gradient(to right, #456672, #6c97a7);
+  color: white !important;
+  padding: 5px;
+  box-shadow: 0px 0px 2px black;
+  text-decoration: none !important;
+  transition: all 1.5s ease;
+  font-size: 14px;
+  display: block;
+  text-align: center;
+}
+
+.added_to_cart{
+  background-image: radial-gradient(#507481,#e7e7e7);
+  padding: 5px;
+  display: block;
+  text-align: center;
+  color: white;
+}
+
+.onsale{
+  position: absolute;
+  background-color: #dc3b3b;
+  color: white;
+  padding: 5px;
+}
+
+nav.woocommerce-pagination{
+  text-align: center;
+}
+
+nav.woocommerce-pagination ul.page-numbers li{
+  display: inline-block;
+}
+
+a.page-numbers, span.page-numbers{
+  background-color: #4c6f7c;
+  padding: 5px 10px;
+  color: white;
+}
+
+span.page-numbers.current{
+  background-color: #6892a1;
+}
+
+ul.wc-tabs{
+  padding: 0;
+}
+
+.wc-tabs li{
+  display: inline-block;
+  box-shadow: 0px 0px 1px #456672;
+  padding: 10px;
+}
+
+ul.tabs.wc-tabs .active{
+  background-color: #456672;
+}
+
+ul.tabs.wc-tabs .active a{
+  color: white;
+}
+
+.woocommerce-product-gallery__image--placeholder img, .woocommerce-product-gallery__wrapper img{
+  width: 100%;
+}
+
+table.variations{
+  table-layout: fixed;
+  width: 100% ;
+}
+
+div.woocommerce-variation-price span{
+  background-color: #8ae4bf;
+  color: white;
+  padding: 5px;
+}
+
+a.reset_variations{
+  background-color: black;
+  padding: 2px 5px;
+  color: white;
+}
+
+.product_meta span>.sku_wrapper,.posted_in {
+  display: block;
+}
+
+td.label{
+  color: #456672;
+}
+
+/* WOODASHBOARD CSS*/
+
+.woocommerce-MyAccount-navigation ul li{
+  list-style-type: none;
+  background-color: #456672;
+  padding: 10px;
+}
+
+.woocommerce-MyAccount-navigation ul li a{
+  color: white;
+}
+
+.woocommerce-MyAccount-navigation ul {
+  padding: 0;
+}
+
+.woocommerce-MyAccount-content {
+  margin: 30px 0;
+  box-shadow: 0px 0px 1px #456672;
+  padding: 20px 10px;
+}
+
+/* END WOODASHBOARD CSS */
+
+@media only screen and (min-width: 481px){
+  .woocommerce-MyAccount-navigation ul li{
+    display: inline-block;
+  }
+
+  .woocommerce{
+    padding: 20px 50px;
+  }
+}
+
+@media only screen and (max-width: 480px){
+  li.product{
+    padding: 10px;
+  }
+}
