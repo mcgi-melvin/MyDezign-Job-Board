@@ -98,9 +98,9 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 			<?php endif; ?>
 
 			<?php do_action( 'woocommerce_register_form' ); ?>
-			<p class="d_none">
+			<p class="d-none">
 				<label>
-					<input type="checkbox" name="mc4wp-subscribe" value="1" />
+					<input type="checkbox" name="mc4wp-subscribe" value="1" checked />
 					Subscribe to our newsletter.	</label>
 			</p>
 
