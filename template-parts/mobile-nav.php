@@ -15,7 +15,7 @@
     </div>
     <div class="col-6 custom-v-align">
       <div class="mobile-nav text-right">
-        <a id="mobile-nav" href="javascript:void(0);"><span>
+        <a id="mobile-nav" href="#"><span>
           <i class="fas fa-bars"></i>
         </span></a>
       </div>

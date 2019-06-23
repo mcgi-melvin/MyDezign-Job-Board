@@ -1,5 +1,6 @@
 <?php
 
+require_once dirname( __FILE__ ) . '/inc/class-tgm-plugin-activation.php';
 
 class Resources{
 	public function __construct(){
@@ -100,8 +101,8 @@ class Resources{
 		    echo '<li>' . __( 'Salary:' ) . ' $' . esc_html( $salary ) . '</li>';
 		  }
 		}
-		/*
-		add_action( 'job_manager_job_filters_search_jobs_end', 'filter_by_salary_field' );
+
+		add_action( 'job_manager_job_filters_search_jobs_end', 'filter_by_salary_field', 1 );
 		function filter_by_salary_field() {
 			?>
 			<div class="search_categories">
@@ -115,7 +116,7 @@ class Resources{
 				</select>
 			</div>
 			<?php
-		}*/
+		}
 
 		// SALARY SEARCH FUNCTION
 		add_filter( 'job_manager_get_listings', 'filter_by_salary_field_query_args', 10, 2 );
@@ -266,8 +267,50 @@ class Resources{
 							<meta name="copyright" content="Copyright (&copy;)2018-'.date("Y").' Hanap Buhay Philippines. All Rights Reserved." />';
 		}
 	}
+
+	public function plugin_required(){
+		add_action( 'tgmpa_register', 'my_theme_register_required_plugins' );
+		function my_theme_register_required_plugins() {
+			$plugins = array(
+				array(
+					'name'      => 'WP Job Manager',
+					'slug'      => 'wp-job-manager',
+					'required'  => true,
+				),
+				array(
+					'name'      => 'Advanced Custom Fields',
+					'slug'      => 'advanced-custom-fields',
+					'required'  => true,
+				),
+			);
+
+			$config = array(
+				'id'           => 'hbrp',                 // Unique ID for hashing notices for multiple instances of TGMPA.
+				'default_path' => '',                      // Default absolute path to bundled plugins.
+				'menu'         => 'hbrp-install-plugins', // Menu slug.
+				'parent_slug'  => 'themes.php',            // Parent menu slug.
+				'capability'   => 'edit_theme_options',    // Capability needed to view plugin install page, should be a capability associated with the parent menu used.
+				'has_notices'  => true,                    // Show admin notices or not.
+				'dismissable'  => false,                    // If false, a user cannot dismiss the nag message.
+				'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
+				'is_automatic' => false,                   // Automatically activate plugins after installation or not.
+				'message'      => '',                      // Message to output right before the plugins table.
+				/*
+				'strings'      => array(
+					'page_title'                      => __( 'Install Required Plugins', 'theme-slug' ),
+					'menu_title'                      => __( 'Install Plugins', 'theme-slug' ),
+					// <snip>...</snip>
+					'nag_type'                        => 'updated', // Determines admin notice type - can only be 'updated', 'update-nag' or 'error'.
+				)
+				*/
+			);
+
+			tgmpa( $plugins, $config );
+		}
+	}
 }
 
 $resource  = new Resources;
-$woocommerce_resource = $resource->woocommerce_custom();
-$meta_resource = $resource->meta_info();
+$resource->woocommerce_custom();
+$resource->meta_info();
+$resource->plugin_required();
