@@ -53,11 +53,6 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 					<input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span><?php esc_html_e( 'Remember me', 'woocommerce' ); ?></span>
 				</label>
 			</p>
-			<p>
-				<label>
-					<input type="checkbox" name="mc4wp-subscribe" value="1" />
-					Subscribe to our newsletter.	</label>
-			</p>
 
 			<p class="woocommerce-LostPassword lost_password">
 				<a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php esc_html_e( 'Lost your password?', 'woocommerce' ); ?></a>
@@ -103,7 +98,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 			<?php endif; ?>
 
 			<?php do_action( 'woocommerce_register_form' ); ?>
-			<p>
+			<p class="d_none">
 				<label>
 					<input type="checkbox" name="mc4wp-subscribe" value="1" />
 					Subscribe to our newsletter.	</label>
