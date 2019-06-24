@@ -9,6 +9,7 @@ class Resources{
     function front_scripts(){
       wp_enqueue_script( 'jquery' );
       wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.js', array('jquery') );
+			wp_enqueue_script( 'google-analytics', 'https://www.googletagmanager.com/gtag/js?id=UA-126698192-1', array('jquery') );
       wp_enqueue_script( 'main-script', get_template_directory_uri() . '/js/script.js', array(), '', true );
       wp_enqueue_style( 'default-style', get_stylesheet_uri() );
 			wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.css' );

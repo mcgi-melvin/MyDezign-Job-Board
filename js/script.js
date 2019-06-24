@@ -1,6 +1,6 @@
 window.onload = function(){
   /* MOBILE NAV JS */
-  if(window.innerWidth <= 480){
+  if(window.innerWidth <= 780){
     var menu_btn = document.getElementById('mobile-nav');
     var close_btn = document.getElementById('mobile-nav-close');
 
@@ -28,5 +28,12 @@ window.onload = function(){
       document.querySelector('.job-submit').style.display = "block";
     }
   }
+
+
+  /* Google Analytics */
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-126698192-1');
 
 }
