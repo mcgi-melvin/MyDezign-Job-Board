@@ -232,8 +232,8 @@ class Resources{
 						}
 
 						if(get_the_company_logo() != ""){
-							echo '<meta property="og:image" content="'.get_the_company_logo().'" />
-										<meta name="twitter:image" content="'.get_the_company_logo().'">';
+							echo '<meta property="og:image" content="'.get_the_post_thumbnail_url(get_the_ID(), 'full').'" />
+										<meta name="twitter:image" content="'.get_the_post_thumbnail_url(get_the_ID(), 'full').'">';
 						} else {
 							echo '<meta property="og:image" content="'.site_url().'/wp-content/plugins/wp-job-manager/assets/images/company.png" />
 										<meta name="twitter:image" content="'.site_url().'/wp-content/plugins/wp-job-manager/assets/images/company.png">';
@@ -262,8 +262,8 @@ class Resources{
 				}
 
 				echo '<meta property="fb:app_id" content="1468692359850697" />
-							<meta property="og:image:width" content="1200px" />
-							<meta property="og:image:height" content="630px" />
+							<meta property="og:image:width" content="200px" />
+							<meta property="og:image:height" content="200px" />
 							<meta property="og:site_name" content="'.get_bloginfo('name').'" />
 							<meta property="og:url" content="'.get_permalink().'" />
 							<meta name="twitter:site" content="@hanapbuhayph">
