@@ -261,7 +261,10 @@ class Resources{
 								';
 				}
 
-				echo '<meta property="og:site_name" content="'.get_bloginfo('name').'" />
+				echo '<meta property="fb:app_id" content="1468692359850697" />
+							<meta property="og:image:width" content="1200px" />
+							<meta property="og:image:height" content="630px" />
+							<meta property="og:site_name" content="'.get_bloginfo('name').'" />
 							<meta property="og:url" content="'.get_permalink().'" />
 							<meta name="twitter:site" content="@hanapbuhayph">
 							<meta name="twitter:card" content="summary_large_image">
