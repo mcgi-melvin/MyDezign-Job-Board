@@ -1,34 +1,16 @@
 <?php get_header(); ?>
-<style>
-.blog-container{
-	padding: 30px 0;
-}
-.loop-blog-single{
-	box-shadow: 0px 0px 1px #346672;
-	margin-bottom: 20px;
-}
-.loop-blog-body{
-	padding: 20px;
-}
-.featured-image div{
-	background-size: cover;
-	width: 100%;
-	height: 200px;
-	background-position: center;
-	background-repeat: no-repeat;
-}
-
-.loop-blog-body .title h3{
-	font-size: 18px;
-}
-</style>
 <div class="blog-container">
 	<div class="container">
 
 
 <?php
-$the_query = new WP_Query( array('order' => 'ASC' ) );
+$the_query = new WP_Query( array('order' => 'DESC' ) );
 if ( $the_query->have_posts() ) :
+	echo '<div class="blog-loop-wrapper">';
+	echo '<div class="page-title">';
+		echo '<h2>'.single_post_title('',false).'</h2>';
+	echo '</div>';
+	echo '<hr />';
 	echo '<div class="row">';
 	echo '<div class="col-md-8 col-12">';
 	while ( $the_query->have_posts() ) :
@@ -64,6 +46,7 @@ if ( $the_query->have_posts() ) :
 	echo '</div>
 	<div class="col-md-4 col-12">';
 	echo 	dynamic_sidebar('primary_sidebar');
+	echo '</div>';
 	echo '</div>';
 	echo '</div>'; //end row
 else:
