@@ -23,6 +23,8 @@ class Resources{
 
     }
 
+		
+
     register_nav_menu('header-menu',__( 'Not Logged In Header Menu', 'Menu for Logout User'));
     register_nav_menu('login-header-menu',__( 'Login Header Menu', 'Menu for Logged in User' ));
 
