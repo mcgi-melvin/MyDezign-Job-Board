@@ -1,11 +1,11 @@
 <?php
 $paged = get_query_var( 'paged' ) ? get_query_var( 'paged', 1 ) : 1;
 $offset = $paged != 1 ? "'offset' => ".$posts_per_page."" : "";
-$posts_per_page = 10;
+$posts_per_page = 9;
 $args = array (
     'paged' => $paged,
     'number' => $posts_per_page,
-    'role' => 'candidate',
+    'role__in' => array('candidate','iwj_candidate'),
     'orderby' => 'DESC',
     $offset
 );
@@ -32,23 +32,39 @@ $total_pages = ceil( $wp_user_query->get_total() / $posts_per_page );
   <?php
     foreach($authors as $candidate){
       $candidate_profile = get_field('my_profile', 'user_'.$candidate->ID);
+      if($candidate_profile['profile_image'] == ""){
+        $profile_image = get_template_directory_uri() .'/images/image-none.png';
+      }else{
+        $profile_image = $candidate_profile['profile_image'];
+      }
       //print_r($candidate_profile);
     ?>
   <div class="col-md-3">
     <div class="single-loop-jobseeker card">
       <div class="profile-image">
-        <img class="img-circle card-img-top" src="<?php echo $candidate_profile['profile_image']; ?>">
+        <img class="img-circle card-img-top" src="<?php echo $profile_image; ?>">
       </div>
       <div class="jobseeker-info card-body">
         <div class="name card-title"><strong><?php echo $candidate->first_name .' '.$candidate->last_name; ?></strong></div>
         <div class="bio card-text">
-          <?php echo substr($candidate->description, 0, 150); ?>
+          <?php
+          if($candidate->description){
+            echo substr($candidate->description, 0, 150);
+          }else{
+            echo 'No Bio';
+          }
+           ?>
         </div>
         <hr />
         <div class="skills card-text">
           <ul>
           <?php
-            for($x = 0; $x <= 4; $x++){
+            if(count($candidate_profile['skills']) != 1){
+              $min_count = count($candidate_profile['skills'])-1;
+            }else{
+              $min_count = count($candidate_profile['skills']);
+            }
+            for($x = 0; $x <= min($min_count,4); $x++){
               echo '<li>'.$candidate_profile['skills'][$x].'</li>';
             }
           ?>
@@ -57,9 +73,7 @@ $total_pages = ceil( $wp_user_query->get_total() / $posts_per_page );
       </div>
     </div>
   </div>
-  <?php
-
-    } ?>
+  <?php } // END FOREACH ?>
   </div> <!--END ROW-->
   <div class="jobseeker-pagination-wrapper">
 
