@@ -22,7 +22,7 @@ $salary = get_post_meta( $post->ID, '_job_salary', true );
 <li <?php job_listing_class(); ?> data-longitude="<?php echo esc_attr( $post->geolocation_lat ); ?>" data-latitude="<?php echo esc_attr( $post->geolocation_long ); ?>">
 	<a style="color:#456672;" href="<?php the_job_permalink(); ?>">
 		<div class="row">
-			<div class="company col-md-1 col-5">
+			<div class="company col-md-2 col-5 col-lg-1">
 			<?php
 						the_company_logo();
 						if(wp_is_mobile()){
@@ -34,7 +34,7 @@ $salary = get_post_meta( $post->ID, '_job_salary', true );
 
 			?>
 			</div>
-			<div class="position col-md-8 col">
+			<div class="position col-md col">
 				<h3><strong class="text-info"><?php echo wpjm_get_the_job_title(); ?></strong></h3>
 				<p class="job-desc fs-14"><?php echo substr(strip_tags(wpjm_get_the_job_description()), 0, 100) .'...'; ?></p>
 				<div class="company fs-14">
@@ -51,10 +51,10 @@ $salary = get_post_meta( $post->ID, '_job_salary', true );
 					?>
 				</div>
 			</div>
-
+			<?php if(!wp_is_mobile()){ ?>
 			<div class="description col-md-3 fs-14 text-right" style="float:right; padding: 0 20px;">
 				<?php
-						if(!wp_is_mobile()){
+
 
 						  if ( $salary ) {
 								echo '<p>' . __( '<i class="fa fa-money-bill-wave" style="color:#ce2727;"></i>' ) . ' $' . esc_html( $salary ) . '</p>';
@@ -74,9 +74,9 @@ $salary = get_post_meta( $post->ID, '_job_salary', true );
 							?>
 						<p class="date fs-14"><?php the_job_publish_date(); ?></p>
 				<?php
-						} // END WP_IS_MOBILE()
 				do_action( 'job_listing_meta_end' ); ?>
 			</div>
+			<?php } // END WP_IS_MOBILE() ?>
 		</div>
 	</a>
 </li>

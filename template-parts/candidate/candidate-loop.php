@@ -1,11 +1,11 @@
 <?php
 $paged = get_query_var( 'paged' ) ? get_query_var( 'paged', 1 ) : 1;
 $offset = $paged != 1 ? "'offset' => ".$posts_per_page."" : "";
-$posts_per_page = 9;
+$posts_per_page = 12;
 $args = array (
     'paged' => $paged,
     'number' => $posts_per_page,
-    'role__in' => array('candidate','iwj_candidate'),
+    'role__in' => array('candidate','iwj_candidate','customer'),
     'orderby' => 'DESC',
     $offset
 );
@@ -15,18 +15,12 @@ $candidate_count = count($authors);
 //print_r($authors);
 $total_pages = ceil( $wp_user_query->get_total() / $posts_per_page );
 ?>
-
-<style>
-  .profile-image img{ display: block; margin: 0 auto; max-width: 100%; max-height: auto;}
-  .jobseeker-wrapper{margin: 30px 0;}
-  .single-loop-jobseeker{box-shadow: 0px 0px 3px #456672;}
-  .jobseeker-info{padding: 10px;}
-  .skills ul{padding: 0;}
-  .skills li{display: inline-block; background-color: #d7d7d7; font-size: 13px; margin:2px; padding: 2px; border-radius: 2px; cursor:default;}
-  .jobseeker-pagination-wrapper{margin-top: 30px; margin-bottom: 30px;}
-  .page-numbers{padding: 0; text-align: center;}
-  .page-numbers li{display: inline-block;}
-</style>
+<div class="row">
+  <?php get_template_part('template-parts/desktop','ads'); ?>
+</div>
+<div class="page-title text-center">
+  <h2>Job Seekers</h2>
+</div>
 <div class="loop-jobseeker">
   <div class="row">
   <?php
@@ -37,21 +31,30 @@ $total_pages = ceil( $wp_user_query->get_total() / $posts_per_page );
       }else{
         $profile_image = $candidate_profile['profile_image'];
       }
+
+      if($candidate->first_name == "" && $candidate->last_name == ""){
+        $name = $candidate->user_nicename;
+      }else{
+        $name = $candidate->first_name .' '.$candidate->last_name;
+      }
       //print_r($candidate_profile);
     ?>
   <div class="col-md-3">
-    <div class="single-loop-jobseeker card">
+    <div class="single-loop-jobseeker">
       <div class="profile-image">
-        <img class="img-circle card-img-top" src="<?php echo $profile_image; ?>">
+        <a href="?cid=<?php echo $candidate->ID; ?>">
+
+          <div style="background-image: url(<?php echo $profile_image; ?>); background-position: center; background-size: cover; height: 200px;"></div>
+        </a>
       </div>
       <div class="jobseeker-info card-body">
-        <div class="name card-title"><strong><?php echo $candidate->first_name .' '.$candidate->last_name; ?></strong></div>
+        <div class="name card-title"><strong><?php echo $name; ?></strong></div>
         <div class="bio card-text">
           <?php
-          if($candidate->description){
-            echo substr($candidate->description, 0, 150);
+          if($candidate_profile['bio']){
+            echo substr($candidate_profile['bio'], 0, 150);
           }else{
-            echo 'No Bio';
+            echo 'To know more about me visit my profile.';
           }
            ?>
         </div>
@@ -60,12 +63,12 @@ $total_pages = ceil( $wp_user_query->get_total() / $posts_per_page );
           <ul>
           <?php
             if(count($candidate_profile['skills']) != 1){
-              $min_count = count($candidate_profile['skills'])-1;
+              $min_count = count($candidate_profile['pskills'])-1;
             }else{
-              $min_count = count($candidate_profile['skills']);
+              $min_count = count($candidate_profile['pskills']);
             }
             for($x = 0; $x <= min($min_count,4); $x++){
-              echo '<li>'.$candidate_profile['skills'][$x].'</li>';
+              echo '<li>'.$candidate_profile['pskills'][$x].'</li>';
             }
           ?>
           </ul>
@@ -86,10 +89,13 @@ $total_pages = ceil( $wp_user_query->get_total() / $posts_per_page );
         'total' => $total_pages, // the total number of pages we have
         'current' => $paged, // the current page
         'end_size' => 1,
-        'mid_size' => 5,
+        'mid_size' => 2,
         'type' => 'list'
     ));
 
      ?>
   </div>
+</div>
+<div class="row">
+  <?php get_template_part('template-parts/desktop','ads'); ?>
 </div>

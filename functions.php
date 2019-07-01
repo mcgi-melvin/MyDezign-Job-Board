@@ -23,7 +23,7 @@ class Resources{
 
     }
 
-		
+
 
     register_nav_menu('header-menu',__( 'Not Logged In Header Menu', 'Menu for Logout User'));
     register_nav_menu('login-header-menu',__( 'Login Header Menu', 'Menu for Logged in User' ));
@@ -105,22 +105,6 @@ class Resources{
 		  }
 		}
 
-		add_action( 'job_manager_job_filters_search_jobs_end', 'filter_by_salary_field', 1 );
-		function filter_by_salary_field() {
-			?>
-			<div class="search_categories">
-				<label for="search_categories"><?php _e( 'Salary', 'wp-job-manager' ); ?></label>
-				<select name="filter_by_salary" class="job-manager-filter">
-					<option value=""><?php _e( 'Any Salary / Monthly', 'wp-job-manager' ); ?></option>
-					<option value="upto20"><?php _e( 'Up to $200', 'wp-job-manager' ); ?></option>
-					<option value="200-400"><?php _e( '$200 to $400', 'wp-job-manager' ); ?></option>
-					<option value="400-600"><?php _e( '$400 to $600', 'wp-job-manager' ); ?></option>
-					<option value="over60"><?php _e( '$600+', 'wp-job-manager' ); ?></option>
-				</select>
-			</div>
-			<?php
-		}
-
 		// SALARY SEARCH FUNCTION
 		add_filter( 'job_manager_get_listings', 'filter_by_salary_field_query_args', 10, 2 );
 		function filter_by_salary_field_query_args( $query_args, $args ) {
@@ -168,11 +152,9 @@ class Resources{
 
 		add_filter( 'woocommerce_get_price_html', 'bbloomer_price_free_zero_empty', 100, 2 );
 		function bbloomer_price_free_zero_empty( $price, $product ){
-
 		if ( '' === $product->get_price() || 0 == $product->get_price() ) {
 		    $price = '<span class="woocommerce-Price-amount amount">FREE</span>';
 		}
-
 		return $price;
 		}
 
@@ -183,6 +165,36 @@ class Resources{
 		  $cols = 9;
 		  return $cols;
 		}
+
+		add_filter ( 'woocommerce_account_menu_items', 'misha_log_history_link', 40 );
+		function misha_log_history_link( $menu_links ){
+
+			$menu_links = array_slice( $menu_links, 0, 5, true )
+			+ array( 'profile' => 'My Profile' )
+			+ array_slice( $menu_links, 5, NULL, true );
+
+			return $menu_links;
+
+		}
+		/*
+		 * Step 2. Register Permalink Endpoint
+		 */
+		add_action( 'init', 'misha_add_endpoint' );
+		function misha_add_endpoint() {
+
+			// WP_Rewrite is my Achilles' heel, so please do not ask me for detailed explanation
+			add_rewrite_endpoint( 'profile', EP_PAGES );
+
+		}
+		/*
+		 * Step 3. Content for the new page in My Account, woocommerce_account_{ENDPOINT NAME}_endpoint
+		 */
+		add_action( 'woocommerce_account_profile_endpoint', 'misha_my_account_endpoint_content' );
+		function misha_my_account_endpoint_content() {
+			echo '<div id="woo-profile">'.get_template_part('template-parts/desktop','ads').'</div>';
+		}
+
+
 
 	}
 

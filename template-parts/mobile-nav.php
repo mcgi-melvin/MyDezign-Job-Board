@@ -32,6 +32,9 @@
               wp_nav_menu(array('theme_location' => 'header-menu','menu' => 'header-menu','menu_id'=>'mobile-nav-menu'));
             }
              ?>
+             <div class="mobile-nav-support random-show" style="display: none;">
+               <?php get_template_part('template-parts/toggle/donation','toggle'); ?>
+             </div>
           </div>
         </div>
       </div>

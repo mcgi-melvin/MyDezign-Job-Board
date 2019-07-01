@@ -18,7 +18,7 @@
       </div>
       <div class="col">
         <div class="top-action text-right">
-            <a class="top-action-btn top-addjob" href="<?php echo site_url('/post-a-job/'); ?>">Submit Job</a>
+            <a class="top-action-btn top-addjob" href="<?php echo site_url('/post-a-job/'); ?>">Recruit</a>
           <?php if(is_user_logged_in()): ?>
             <a class="top-action-btn top-account" href="<?php echo site_url('/my-account/'); ?>">My Account</a>
             <a class="top-action-btn top-login" href="<?php echo wp_logout_url(site_url().'/my-account/'); ?>">Logout</a>

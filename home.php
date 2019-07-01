@@ -1,7 +1,10 @@
 <?php get_header(); ?>
+
 <div class="blog-container">
 	<div class="container">
-
+		<div class="row">
+	    <?php get_template_part('template-parts/desktop','ads'); ?>
+	  </div>
 
 <?php
 $the_query = new WP_Query( array('order' => 'DESC' ) );
@@ -13,8 +16,7 @@ if ( $the_query->have_posts() ) :
 	echo '<hr />';
 	echo '<div class="row">';
 	echo '<div class="col-md-8 col-12">';
-	while ( $the_query->have_posts() ) :
-	$the_query->the_post();
+	while ( $the_query->have_posts() ) : $the_query->the_post();
 ?>
 
 		<div class="loop-blog-single">
@@ -43,11 +45,11 @@ if ( $the_query->have_posts() ) :
 <?php
 	wp_reset_postdata();
 	endwhile;
-	echo '</div>
-	<div class="col-md-4 col-12">';
-	echo 	dynamic_sidebar('primary_sidebar');
-	echo '</div>';
-	echo '</div>';
+		echo '</div>
+			<div class="col-md-4 col-12">';
+				echo 	dynamic_sidebar('primary_sidebar');
+			echo '</div>';
+		echo '</div>';
 	echo '</div>'; //end row
 else:
 	echo 'No Post';
@@ -55,14 +57,9 @@ endif;
 ?>
 
 
-
-
-
-
-
-
-
-
+		<div class="row">
+			<?php get_template_part('template-parts/desktop','ads'); ?>
+		</div>
 	</div>
 </div>
 <?php get_footer(); ?>

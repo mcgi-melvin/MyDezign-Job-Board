@@ -6,6 +6,9 @@ $content = apply_filters('the_content', $post->post_content);
 
 <div class="index-main">
   <div class="container">
+    <div class="row">
+	    <?php get_template_part('template-parts/desktop','ads'); ?>
+	  </div>
     <div class="content-wrapper">
       <div class="title">
         <h2><?php the_title(); ?></h2>
@@ -18,6 +21,9 @@ $content = apply_filters('the_content', $post->post_content);
       </div>
 
     </div>
+    <div class="row">
+	    <?php get_template_part('template-parts/desktop','ads'); ?>
+	  </div>
   </div>
 </div>
 
