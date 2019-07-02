@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $job_manager;
 ?>
-<div class="container" style="margin-top: 30px;">
+<div class="container" style="margin-top: 30px;margin-top: 30px;background: white;border-radius: 5px;padding: 20px;">
 <form action="<?php echo esc_url( $action ); ?>" method="post" id="submit-job-form" class="job-manager-form" enctype="multipart/form-data">
 
 	<?php

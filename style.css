@@ -14,7 +14,16 @@
 */
 
 /* header style */
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+/*@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+*/
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('font/RobotoCondensed-Regular-webfont.eot'); /* IE9 Compat Modes */
+  src: url('font/RobotoCondensed-Regular-webfont?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('font/font/RobotoCondensed-Regular-webfont.woff') format('woff'), /* Modern Browsers */
+       url('font/RobotoCondensed-Regular-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
 
 body{font-family: 'Roboto', sans-serif !important;}
 h1,h2,h3,h4,h5{color: #456672 !important;}

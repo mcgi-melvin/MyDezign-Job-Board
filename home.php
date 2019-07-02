@@ -21,7 +21,7 @@ if ( $the_query->have_posts() ) :
 	echo '</div>';
 	echo '<hr />';
 	echo '<div class="row">';
-	echo '<div class="col-md-8 col-12">';
+	echo '<div class="col-md-8 col-12" style="border-right: 1px solid #d7d7d7;">';
 	while ( $the_query->have_posts() ) : $the_query->the_post();
 ?>
 
