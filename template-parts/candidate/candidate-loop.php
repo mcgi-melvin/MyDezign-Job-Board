@@ -15,9 +15,6 @@ $candidate_count = count($authors);
 //print_r($authors);
 $total_pages = ceil( $wp_user_query->get_total() / $posts_per_page );
 ?>
-<div class="row">
-  <?php get_template_part('template-parts/desktop','ads'); ?>
-</div>
 <div class="page-title text-center">
   <h2>Job Seekers</h2>
 </div>
@@ -95,7 +92,4 @@ $total_pages = ceil( $wp_user_query->get_total() / $posts_per_page );
 
      ?>
   </div>
-</div>
-<div class="row">
-  <?php get_template_part('template-parts/desktop','ads'); ?>
 </div>

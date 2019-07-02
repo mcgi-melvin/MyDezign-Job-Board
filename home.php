@@ -1,4 +1,8 @@
-<?php get_header(); ?>
+<?php
+$paged = get_query_var( 'paged' ) ? get_query_var( 'paged', 1 ) : 1;
+$offset = $paged != 1 ? "'offset' => ".$posts_per_page."" : "";
+get_header();
+?>
 
 <div class="blog-container">
 	<div class="container">
@@ -8,7 +12,9 @@
 
 <?php
 $the_query = new WP_Query( array('order' => 'DESC' ) );
+
 if ( $the_query->have_posts() ) :
+	$total_pages = ceil( $the_query->found_posts / 10 );
 	echo '<div class="blog-loop-wrapper">';
 	echo '<div class="page-title">';
 		echo '<h2>'.single_post_title('',false).'</h2>';
@@ -51,6 +57,25 @@ if ( $the_query->have_posts() ) :
 			echo '</div>';
 		echo '</div>';
 	echo '</div>'; //end row
+	?>
+	<div class="jobseeker-pagination-wrapper">
+
+    <?php
+    echo paginate_links( array(
+        'base' => str_replace( 99999, '%#%', esc_url( get_pagenum_link( 99999 ) ) ), // the base URL, including query arg
+        'format' => '/%#%/', // this defines the query parameter that will be used, in this case "p"
+        'prev_text' => __('&laquo; Previous'), // text for previous page
+        'next_text' => __('Next &raquo;'), // text for next page
+        'total' => $total_pages, // the total number of pages we have
+        'current' => $paged, // the current page
+        'end_size' => 1,
+        'mid_size' => 2,
+        'type' => 'list'
+    ));
+
+     ?>
+  </div>
+	<?php
 else:
 	echo 'No Post';
 endif;

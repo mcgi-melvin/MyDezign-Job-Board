@@ -5,7 +5,7 @@
 get_header();
 ?>
 <main>
-<div class="body-content" style="padding: 10px 20px;">
+<div class="body-content container">
   <div class="row">
     <?php get_template_part('template-parts/desktop','ads'); ?>
   </div>

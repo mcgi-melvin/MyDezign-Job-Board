@@ -15,13 +15,10 @@ if($user->first_name == "" && $user->last_name == ""){
 }
 
 ?>
-<div class="row">
-  <?php get_template_part('template-parts/desktop','ads'); ?>
-</div>
 <div class="candidate-single-wrapper">
   <div class="row">
     <div class="col-md-4">
-      <img class="single-img-circle card-img-top" src="<?php echo $profile_image; ?>">
+      <img class="single-img-circle" src="<?php echo $profile_image; ?>">
     </div>
     <div class="col-md-8 custom-valign">
       <div class="single-profile-info">
@@ -191,7 +188,4 @@ if($user->first_name == "" && $user->last_name == ""){
 
 
 
-</div>
-<div class="row">
-  <?php get_template_part('template-parts/desktop','ads'); ?>
 </div>

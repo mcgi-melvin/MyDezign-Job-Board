@@ -14,11 +14,19 @@
       </div>
     </div>
     <div class="col-6 custom-v-align">
+
       <div class="mobile-nav text-right">
-        <a id="mobile-nav" href="#"><span>
-          <i class="fas fa-bars"></i>
-        </span></a>
+        <a href="<?php echo site_url('post-a-job'); ?>">
+          <span><i title="Start Hiring" class="fas fa-user-plus text-dark"></i></span>
+        </a>
+        <a href="<?php echo site_url('my-account'); ?>">
+          <span><i title="My Account" class="fas fa-user text-dark"></i></span>
+        </a>
+        <a id="mobile-nav" href="#">
+          <span><i title="Open Navigation" class="fas fa-bars"></i></span>
+        </a>
       </div>
+
       <div class="nav-overlay">
         <div class="row">
           <div class="col-offset-8 text-right">
@@ -38,6 +46,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
