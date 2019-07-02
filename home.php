@@ -11,7 +11,7 @@ get_header();
 	  </div>
 
 <?php
-$the_query = new WP_Query( array('order' => 'DESC' ) );
+$the_query = new WP_Query( array('order' => 'DESC', 'paged' => $paged ) );
 
 if ( $the_query->have_posts() ) :
 	$total_pages = ceil( $the_query->found_posts / 10 );
@@ -51,12 +51,6 @@ if ( $the_query->have_posts() ) :
 <?php
 	wp_reset_postdata();
 	endwhile;
-		echo '</div>
-			<div class="col-md-4 col-12">';
-				echo 	dynamic_sidebar('primary_sidebar');
-			echo '</div>';
-		echo '</div>';
-	echo '</div>'; //end row
 	?>
 	<div class="jobseeker-pagination-wrapper">
 
@@ -76,6 +70,12 @@ if ( $the_query->have_posts() ) :
      ?>
   </div>
 	<?php
+		echo '</div>
+			<div class="col-md-4 col-12">';
+				echo 	dynamic_sidebar('primary_sidebar');
+			echo '</div>';
+		echo '</div>';
+	echo '</div>'; //end row
 else:
 	echo 'No Post';
 endif;
