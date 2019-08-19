@@ -6,7 +6,7 @@ add_action( 'rest_api_init', 'register_api_hooks' );
 function register_api_hooks() {
   register_rest_route( 'myapp/v1', '/login/',
     array(
-      'methods'  => WP_REST_Server::READABLE:,
+      'methods'  => 'GET',
       'callback' => 'login',
     ),
   );
