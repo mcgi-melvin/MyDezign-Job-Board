@@ -26,11 +26,16 @@
 }
 
 body{font-family: 'Roboto', sans-serif !important;}
-h1,h2,h3,h4,h5{color: #456672 !important;}
+h1.site_title { color: white; }
 ul{margin: 0 !important;}
-li.menu-item{display: inline-block;margin: 10px;}
-li.menu-item:hover {border-bottom: 2px solid white;transition: border 0.3s ease;}
-li.menu-item a{color: white;text-decoration: none;}
+.menu li.menu-item, .menu li.page_item{ display: inline-block; margin: 10px; border-bottom: 2px solid #325d6c; }
+.menu li.menu-item:hover, .menu li.page_item:hover { border-bottom: 2px solid white; transition: border 1s ease; }
+.menu li.menu-item a, .menu li.page_item a{ color: white; text-decoration: none;}
+.menu li.menu-item-has-children ul.sub-menu { display: none; }
+
+.sub-menu { background-color: white; position: absolute;}
+.sub-menu li.menu-item a, .sub-menu li.page_item a { color: #325d6c }
+
 .current_page_item{border-bottom: 2px solid white;}
 .job-listings{border-left: 1px solid #ececec;border-right: 1px solid #ececec;box-shadow: 0px 0px 10px #ececec;}
 .top-action-btn:hover{background-image: linear-gradient(to left, #456672, #6c97a7);}

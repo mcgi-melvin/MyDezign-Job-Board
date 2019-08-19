@@ -12,18 +12,27 @@
     <div class="row text-center">
       <div class="col-md-4">
         <h3>About Us</h3>
+        <?php if( get_field('footer_about_us','option') ): ?>
         <div class="about footer-about">
-          <p class="text-justify">Hanap Buhay is a complete solution for recruiting agencies and human resources. It’s a perfect website to offer your clients career evolving, new projects for freelancers or just great chances of employment.</p>
+
+          <p class="text-justify"><?php echo get_field('footer_about_us','option'); ?></p>
+
         </div>
+        <?php endif; ?>
       </div>
       <div class="col-md-4">
         <h3>Quick Links</h3>
         <div class="q-links footer-qlinks">
+          <?php if( get_field('footer_quick_links','option') ):
+            $links = get_field('footer_quick_links','option');
+          ?>
           <ul class="quick-links" style="padding: 0;">
-            <li><a href="<?php echo site_url('/privacy/'); ?>">Privacy Policy</a></li>
-            <li><a href="<?php echo site_url('/terms-and-conditions/'); ?>">Terms and Conditions</a></li>
-            <li><a href="<?php echo site_url('/cookie/'); ?>">Cookie Policy</a></li>
+            <?php foreach( $links as $link ): ?>
+              <li><a href="<?php echo $link['footer_ql_page_link']; ?>"><?php echo $link['footer_ql_page_title']; ?></a></li>
+            <?php
+            endforeach; ?>
           </ul>
+          <?php endif; ?>
         </div>
       </div>
       <div class="col-md-4">
