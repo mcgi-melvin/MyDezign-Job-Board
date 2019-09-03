@@ -1,12 +1,3 @@
-<style>
-  footer{
-    padding: 30px 20px;
-    background-color: #e7e7e7;
-  }
-  ul.quick-links li{
-    list-style-type: none;
-  }
-</style>
 <footer>
   <div class="container">
     <div class="row text-center">

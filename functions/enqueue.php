@@ -17,6 +17,13 @@ function front_scripts(){
 
   include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
+  wp_enqueue_script( 'wp-api', get_template_directory_uri() . '/assets/js/api.js' );
+  wp_localize_script( 'wp-api', 'wpApiSettings', array(
+      'root' => esc_url_raw( rest_url() ),
+      'nonce' => wp_create_nonce( 'wp_rest' )
+  ) );
+
+
 }
 
 ?>

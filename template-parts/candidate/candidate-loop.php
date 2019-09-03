@@ -22,19 +22,6 @@ $total_pages = ceil( $wp_user_query->get_total() / $posts_per_page );
   <div class="row">
   <?php
     foreach($authors as $candidate){
-      $candidate_profile = get_field('my_profile', 'user_'.$candidate->ID);
-      if($candidate_profile['profile_image'] == ""){
-        $profile_image = get_template_directory_uri() .'/images/image-none.png';
-      }else{
-        $profile_image = $candidate_profile['profile_image'];
-      }
-
-      if($candidate->first_name == "" && $candidate->last_name == ""){
-        $name = $candidate->user_nicename;
-      }else{
-        $name = $candidate->first_name .' '.$candidate->last_name;
-      }
-      //print_r($candidate_profile);
     ?>
   <div class="col-md-3">
     <div class="single-loop-jobseeker">
@@ -47,27 +34,12 @@ $total_pages = ceil( $wp_user_query->get_total() / $posts_per_page );
       <div class="jobseeker-info card-body">
         <div class="name card-title"><strong><?php echo $name; ?></strong></div>
         <div class="bio card-text">
-          <?php
-          if($candidate_profile['bio']){
-            echo substr($candidate_profile['bio'], 0, 150);
-          }else{
-            echo 'To know more about me visit my profile.';
-          }
-           ?>
+          <!-- CANDIDATE PROFILE -->
         </div>
         <hr />
         <div class="skills card-text">
           <ul>
-          <?php
-            if(count($candidate_profile['skills']) != 1){
-              $min_count = count($candidate_profile['pskills'])-1;
-            }else{
-              $min_count = count($candidate_profile['pskills']);
-            }
-            for($x = 0; $x <= min($min_count,4); $x++){
-              echo '<li>'.$candidate_profile['pskills'][$x].'</li>';
-            }
-          ?>
+          <!-- CANDIDATE SKILLS -->
           </ul>
         </div>
       </div>

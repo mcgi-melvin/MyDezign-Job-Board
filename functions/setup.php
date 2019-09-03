@@ -86,6 +86,7 @@ function my_theme_register_required_plugins() {
   tgmpa( $plugins, $config );
 }
 
+// Add custom post type to rest api
 add_action( 'init', 'my_custom_post_type_rest_support', 25 );
 function my_custom_post_type_rest_support() {
 	global $wp_post_types;
@@ -98,5 +99,41 @@ function my_custom_post_type_rest_support() {
 	}
 }
 
+add_action( 'rest_api_init', 'register_api_hooks' );
+function register_api_hooks() {
+  register_rest_route( 'myapp/v1', '/login/',
+    array(
+      'methods'  => 'GET', 'POST',
+      'callback' => 'login',
+    )
+  );
+  register_rest_route( 'myapp/v1', '/signup/',
+    array(
+      'methods'  => 'GET', 'POST',
+      'callback' => 'signup',
+    )
+  );
+}
+/* ADDING ACF INTO REST API */
+add_action( 'rest_api_init', 'slug_register_acf' );
+function slug_register_acf() {
+  $post_types = get_post_types(['public'=>true], 'names');
+  foreach ($post_types as $type) {
+    register_rest_field( $type,
+        'acf',
+        array(
+            'get_callback'    => 'slug_get_acf',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+  }
+}
+function slug_get_acf( $object, $field_name, $request ) {
+    return get_fields($object[ 'id' ]);
+}
+
+add_filter('show_admin_bar', '__return_false');
+//remove_action( 'shutdown', 'wp_ob_end_flush_all', 1 );
 
 ?>
