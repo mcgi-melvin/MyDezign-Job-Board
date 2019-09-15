@@ -2,14 +2,30 @@
 
 add_action('wp_head','keywords_and_desc');
 function keywords_and_desc(){
-    echo '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <script>
-          (adsbygoogle = window.adsbygoogle || []).push({
-              google_ad_client: "ca-pub-3206044396168883",
-              enable_page_level_ads: true
-          });
-          </script>';
-    global $post;
+  global $post;
+  /* GOOGLE ANALYTICS */
+  echo '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-3206044396168883",
+            enable_page_level_ads: true
+        });
+        </script>';
+  /* MAILCHIMP POPUP FORM*/
+  echo '<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+  <script type="text/javascript">
+  window.dojoRequire(["mojo/signup-forms/Loader"], function(L) {
+    L.start({
+      "baseUrl":"mc.us18.list-manage.com",
+      "uuid":"862c320d356bc193d90253597",
+      "lid":"93de7c249c",
+      "uniqueMethods":true})
+    });
+  </script>';
+
+
+
+
     if (is_single()){
         $test = get_post_meta(get_the_ID());
         $get_post = get_post(get_the_ID());

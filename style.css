@@ -4,7 +4,7 @@
   Author: Melvin Lomibao
   Author URI: https://github.com/mcgi-melvin
   Description: It's a free to use job board theme
-  Version: 1.2.1.2
+  Version: 1.3
   GitHub Theme URI: mcgi-melvin/MyDezign-Job-Board
   GitHub Theme URI: https://github.com/mcgi-melvin/MyDezign-Job-Board
   License: GNU General Public License v2 or later
@@ -26,24 +26,47 @@
   font-weight: 100,200,300,400,500,600,700,800,900;
 }
 
-body{font-family: 'Roboto', sans-serif !important;}
-h1.site_title { color: white; }
-ul{margin: 0 !important;}
-.menu li.menu-item, .menu li.page_item{ display: inline-block; margin: 10px; border-bottom: 2px solid #325d6c; }
-.menu li.menu-item:hover, .menu li.page_item:hover { border-bottom: 2px solid white; transition: border 1s ease; }
-.menu li.menu-item a, .menu li.page_item a{ color: white; text-decoration: none;}
-.menu li.menu-item-has-children ul.sub-menu { display: none; }
+@font-face {
+  font-family: 'Montserrat';
+  src: url('assets/font/Montserrat-Regular.ttf'); /* IE9 Compat Modes */
+  font-weight: 100,200,300,400,500,600,700,800,900;
+}
 
-.sub-menu { background-color: white; position: absolute;}
-.sub-menu li.menu-item a, .sub-menu li.page_item a { color: #325d6c }
+* { font-family: Montserrat, sans-serif; }
+body, main#jobemployph_wrapper { min-height: 100vh; overflow-x: hidden; }
+ul {margin: 0 !important;}
+input, textarea { outline: none; }
+p { font-size: 14px; }
+table { table-layout: fixed; }
 
-.current_page_item{border-bottom: 2px solid white;}
-.job-listings{border-left: 1px solid #ececec;border-right: 1px solid #ececec;box-shadow: 0px 0px 10px #ececec;}
-ul.social-icons{padding-left: 0;}
-.social-icons li{display: inline-block;margin: 0 2px;}
-.top-icon li a {color: #314357;font-size: 20px;}
-.page-title{margin: 30px 0;}
-.navigation{
+
+#jobemployph_wrapper input,
+#jobemployph_wrapper select { outline: none; width: 100%; padding: 10px; margin: 5px 0; border-top: none; border-left: none; border-right: none; }
+#jobemployph_wrapper select,
+#jobemployph_wrapper input[type="text"],
+#jobemployph_wrapper input[type="email"] { border-bottom: 1px solid #78c9e6; }
+#jobemployph_wrapper input[type="submit"] {
+  background-image: linear-gradient(to right, #456672, #6c97a7, #456672);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+
+#header h1.site_title { color: white; }
+#header #menu-main-menu { padding-left: 0; }
+#header .menu li.menu-item, .menu li.page_item{ display: inline-block; padding: 20px; font-size: 13px; }
+#header .menu li.menu-item:hover, #header .menu li.page_item:hover,
+#header .menu .current_page_item { background-color: #78c9e6; transition: border 1s ease; }
+#header .menu li.menu-item a, .menu li.page_item a{ color: white; text-decoration: none;}
+#header .menu li.menu-item-has-children ul.sub-menu { display: none; }
+#header .sub-menu { background-color: white; position: absolute;}
+#header .sub-menu li.menu-item a, .sub-menu li.page_item a { color: #325d6c }
+#header ul.social-icons { padding-left: 0; }
+#header .social-icons li { display: inline-block;margin: 0 2px; }
+#header .top-icon li a { color: #314357;font-size: 20px; }
+#header .page-title{ margin: 30px 0; }
+#header .navigation{
   background: rgba(50,74,83,1);
   background: -moz-linear-gradient(-45deg, rgba(50,74,83,1) 0%, rgba(69,102,114,1) 0%, rgba(50,93,108,1) 42%, rgba(50,93,108,1) 96%);
   background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(50,74,83,1)), color-stop(0%, rgba(69,102,114,1)), color-stop(42%, rgba(50,93,108,1)), color-stop(96%, rgba(50,93,108,1)));
@@ -52,7 +75,7 @@ ul.social-icons{padding-left: 0;}
   background: -ms-linear-gradient(-45deg, rgba(50,74,83,1) 0%, rgba(69,102,114,1) 0%, rgba(50,93,108,1) 42%, rgba(50,93,108,1) 96%);
   background: linear-gradient(135deg, rgba(50,74,83,1) 0%, rgba(69,102,114,1) 0%, rgba(50,93,108,1) 42%, rgba(50,93,108,1) 96%);
 }
-.top-action-btn {
+#header .top-action-btn {
   background-image: linear-gradient(to right, #456672, #6c97a7, #456672);
   color: white !important;
   padding: 5px 20px;
@@ -61,8 +84,77 @@ ul.social-icons{padding-left: 0;}
   transition: all 1.5s ease;
   font-size: 14px;
 }
+#header .user-btn { color: white; }
 
 /* end header style */
+
+/* HOME NEW CSS */
+#home_container h1, #home_container .home-box a { color: #445672; }
+#home_container .banner {
+  position: relative;
+  min-height: 700px;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+}
+#home_container .overlay {
+  position: absolute;
+  top:0;
+  left:0;
+  background-color: rgba(14, 136, 167, .2);
+  height: 100%;
+  width: 100%;
+}
+#home_container .home-box {
+  position: absolute;
+  z-index: 100;
+  top: 15%;
+  padding: 70px;
+  border: 5px solid #78c9e6;
+  background-color: white;
+}
+
+#JEPH_process .row { margin-left: 0; margin-right: 0; }
+#JEPH_process .col-md-6 { height: 600px; }
+
+#JEPH_featured { padding-top: 100px; padding-bottom: 100px; }
+#JEPH_featured .joblist-container,
+#JEPH_joblist_loop .joblist-container { background-color: white; padding: 20px; box-shadow: 0 1px 1px rgba(0,0,0,0.05); min-height: 300px; }
+#JEPH_featured h3,
+#JEPH_joblist_loop h3 { font-size: 25px; color: #445672; }
+#JEPH_featured time, #JEPH_featured .salary, #JEPH_featured .company,
+#JEPH_joblist_loop time, #JEPH_joblist_loop .salary,
+#JEPH_joblist_loop .company { font-size: 12px; color: #a0a0a0; }
+#JEPH_featured .ApplyNow a { display: inline-block;; }
+
+#JEPH_CTA { background-color: white; padding-top: 100px; padding-bottom: 100px; }
+#JEPH_CTA .cta-text,
+#JEPH_CTA .cta-form { padding-left: 100px; padding-right: 100px; }
+
+/* END HOME */
+
+/* JOB LIST STYLE */
+
+#JEPH_joblist { padding-bottom: 20px; }
+#JEPH_joblist .overlay { background: rgba(0,0,0,0.5); position:absolute; width: 100%; height: 100%; top:0; }
+#JEPH_joblist h2 { z-index: 9999; position: relative; }
+#JEPH_joblist .banner {
+  min-height: 50px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  margin-bottom: 20px;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+#JEPH_joblist #JEPH_joblist_filter,
+#JEPH_joblist #JEPH_sidebar { background-color: white; padding: 20px; box-shadow: 0 1px 1px rgba(0,0,0,0.05); min-height: 300px; }
+
+#JEPH_joblist_loop .ApplyNow { display: none; }
+
+/* END JOB LIST STYLE */
+
 
 /* FOOTER STYLE */
 
@@ -194,6 +286,8 @@ ul.quick-links li{
 
 /* USEFUL CSS */
 
+
+.theme_button { background-image: linear-gradient(to right, #456672, #6c97a7, #456672); padding: 15px 20px; color: white; }
 .custom-v-align {display: block;margin: auto 0;}
 .fs-14{font-size: 14px;}
 .display_none{display: none;}
@@ -211,6 +305,7 @@ ul.quick-links li{
   table.job-manager-jobs{table-layout: fixed;}
 }
 
+table.table-borderless td { border: none !important; }
 p{ margin-bottom: 0 !important; }
 .search_jobs{background-color: #456672;}
 .job_types{background-color: #456672 !important;color: white;}

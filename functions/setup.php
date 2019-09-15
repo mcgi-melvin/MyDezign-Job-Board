@@ -13,6 +13,47 @@ add_theme_support( 'custom-logo', array(
     )
 );
 
+add_action( 'init', 'events_post_init' );
+/**
+ * Add Custom Post Type Events
+ */
+function events_post_init() {
+	$labels = array(
+		'name'               => _x( 'Events', 'post type general name', 'hanap-buhay' ),
+		'singular_name'      => _x( 'Event', 'post type singular name', 'hanap-buhay' ),
+		'menu_name'          => _x( 'Events', 'admin menu', 'hanap-buhay' ),
+		'name_admin_bar'     => _x( 'Event', 'add new on admin bar', 'hanap-buhay' ),
+		'add_new'            => _x( 'Add New', 'event', 'hanap-buhay' ),
+		'add_new_item'       => __( 'Add New Event', 'hanap-buhay' ),
+		'new_item'           => __( 'New Event', 'hanap-buhay' ),
+		'edit_item'          => __( 'Edit Event', 'hanap-buhay' ),
+		'view_item'          => __( 'View Event', 'hanap-buhay' ),
+		'all_items'          => __( 'All Events', 'hanap-buhay' ),
+		'search_items'       => __( 'Search Events', 'hanap-buhay' ),
+		'parent_item_colon'  => __( 'Parent Events:', 'hanap-buhay' ),
+		'not_found'          => __( 'No Events found.', 'hanap-buhay' ),
+		'not_found_in_trash' => __( 'No Events found in Trash.', 'hanap-buhay' )
+	);
+
+	$args = array(
+		'labels'             => $labels,
+		'description'        => __( 'Description.', 'hanap-buhay' ),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => array( 'slug' => 'event' ),
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => false,
+		'menu_position'      => null,
+		'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
+	);
+
+	register_post_type( 'event', $args );
+}
+
 add_action( 'widgets_init', '_widgets_init' );
 function _widgets_init() {
   register_sidebar(
@@ -135,5 +176,32 @@ function slug_get_acf( $object, $field_name, $request ) {
 
 add_filter('show_admin_bar', '__return_false');
 //remove_action( 'shutdown', 'wp_ob_end_flush_all', 1 );
+
+
+add_action('get_template_url', '_get_template_url');
+function _get_template_url($templateFileName){
+  $pages = get_posts( array(
+      'post_type' => 'page',
+      'meta_key' => '_wp_page_template',
+      'meta_value' => $templateFileName, // Change this to your template file name ex. page-joblist.php
+      'hierarchical' => 0,
+  ) );
+
+  return $pages;
+  //print_r($pages);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ?>

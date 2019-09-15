@@ -1,4 +1,6 @@
 window.onload = function(){
+
+
   /* MOBILE NAV JS */
 
     var menu_btn = document.getElementById('mobile-nav');

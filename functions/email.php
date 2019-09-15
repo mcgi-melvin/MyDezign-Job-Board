@@ -1,5 +1,4 @@
 <?php
-//$mailData['api_key'] = '45d12b7e366e6a64f32cd36d62438e96-us18'; // HANAP BUHAY API
 //$mailData['api_key'] = '7a1c109ae792a8602b8db8e05ce1c158-us18'; // DUMMY API
 $mailData = [];
 $mailData['data'] = [];
@@ -8,7 +7,15 @@ $mailData['server'] = substr($mailData['api_key'],strpos($mailData['api_key'],'-
 $mailData['request'] = ''; // POST, GET, PUT, DELETE
 $mailData['errors'] = ['400','401','403','404','405','414','422','429','500'];
 
-function genericCurl($mailData){
+/* CRON JOBS */
+add_action( 'init', function () {
+	if (! wp_next_scheduled ( 'daily_jobs' )) {
+	   wp_schedule_event(time(), 'daily', 'daily_jobs');
+	}
+	add_action('daily_jobs', 'createCampaign');
+});
+
+function genericMCCurl($mailData){
   // send a HTTP POST request with curl
   $data = json_encode($mailData['data']);
   $api_endpoint = 'https://'.$mailData['server'].'.api.mailchimp.com/3.0/' . $mailData['url'];
@@ -30,6 +37,10 @@ function genericCurl($mailData){
      $response = $err;
   }
   $response = json_decode($response, true);
+  foreach($response as $d){
+	  $data .= $d. "\n";
+  }
+  file_put_contents('logs.txt', $data.PHP_EOL , FILE_APPEND | LOCK_EX);
   return $response;
 }
 
@@ -40,7 +51,7 @@ function getLastCampaignID(){
   $mailData['data'] = array(
     'list_id' => get_field('MC_candidate_list_id','option'),
   );
-  $response = genericCurl($mailData);
+  $response = genericMCCurl($mailData);
   $mailData['campaignID'] = $response['campaigns'][0]['id'];
   $mailData['campaignWebID'] =  $response['campaigns'][0]['web_id'];
   return $mailData;
@@ -66,8 +77,8 @@ function createCampaign(){
     ),
   );
 
-  $response = genericCurl($mailData);
-  if(!in_array($response['status'], $mailData['errors'])){
+  $response = genericMCCurl($mailData);
+  if($response){
     updateTemplate();
   }
 }
@@ -78,7 +89,7 @@ function sendCampaign(){
   $mailData['request'] = 'POST';
   $mailData['url'] = 'campaigns/'.$campaign_id['campaignID'].'/actions/send';
 
-  print_r(genericCurl($mailData));
+  genericMCCurl($mailData);
 }
 
 function updateTemplate(){
@@ -93,7 +104,7 @@ function updateTemplate(){
       'sections' => $jobs
     ],
   ];
-  $response = genericCurl($mailData);
+  $response = genericMCCurl($mailData);
   if($response){
     sendCampaign();
   }
@@ -104,32 +115,44 @@ function getTemplateID(){
   $mailData['request'] = 'GET';
   $mailData['url'] = 'templates?type=user&count=1';
 
-  $response = genericCurl($mailData);
+  $response = genericMCCurl($mailData);
   return $response['templates'][0]['id'];
 }
 
 function createTemplate(){
+  global $mailData;
   $mailData['request'] = 'POST';
   $mailData['url'] = 'templates';
   $mailData['data'] = array(
     'name' => 'Daily Job Update',
     'html' => file_get_contents(get_template_directory_uri() . '/template-parts/email/email-job-update.html'),
   );
-  genericCurl($mailData);
+  genericMCCurl($mailData);
 }
 
 function getLatestJob(){
   $jobData = [];
-  $args = array('post_type'=>'job_listing','LIMIT'=>5);
+  $args = array(
+		'post_type'=>'job_listing',
+		'posts_per_page'=>-1,
+		'meta_query' => array(
+			array(
+				'key' => '_featured',
+				'value' => 1
+			),
+		),
+	);
   $query = new WP_Query($args);
   if ( $query->have_posts() ) {
     $i = 1;
     while ( $query->have_posts() ) {
-        $query->the_post();
-        $jobData['list_'.$i] = '<h2>'.get_the_title().'</h2><p>'.substr(get_the_content(), 0, 250).'</p><div style="text-align: center;"><a href="'.get_permalink().'" style="background-color:#0e88a7;padding:10px 20px;color:#FFFFFF;text-decoration:none;">Learn More</a></div>';
-    $i++;
+			$query->the_post();
+			$jobData['list_'.$i] = '<h2>'.get_the_title().'</h2><p>'.substr(strip_tags(get_the_content()), 0, 250).'</p><div style="text-align: center;"><a href="'. get_permalink() .'" style="background-color:#0e88a7;padding:10px 20px;color:#FFFFFF;text-decoration:none;">Learn More</a></div>';
+			$i++;
+
     }
   }
+
   return $jobData;
 }
 
@@ -157,6 +180,9 @@ function test_header(){
     updateTemplate();
   }
 
+	if(isset($_GET['get_latest_job'])){
+		getLatestJob();
+	}
 }
 
 
