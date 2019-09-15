@@ -120,16 +120,17 @@ function _joblist_loop(){
 }
 
 add_action('getJobList','_getJobList', 10, 2);
-function _getJobList($args = [], $class){
-
+function _getJobList($args = [], $class, $onPagi = 1){ // TODO ON/OFF pagination
   $the_query = new WP_Query( $args );
   if ( $the_query->have_posts() ) :
+    $total_pages = ceil( $the_query->found_posts / 10 );
     while ( $the_query->have_posts() ) :
       $the_query->the_post();
       do_action('JEPH_loop_start',__( $class, 'jobemployph' ));
       do_action('joblist_loop');
       do_action('JEPH_loop_end');
     endwhile;
+    do_action('JEPH_pagination', $total_pages, $args['paged']);
     wp_reset_postdata();
   else:
     echo 'No Results Found';

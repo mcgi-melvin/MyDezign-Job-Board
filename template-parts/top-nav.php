@@ -17,6 +17,7 @@
         </div>
       </div>
       <div class="col">
+        <!--
         <div class="top-action text-right">
             <a class="top-action-btn top-addjob" href="<?php echo site_url('/post-a-job/'); ?>">Recruit</a>
           <?php if(is_user_logged_in()): ?>
@@ -27,6 +28,7 @@
             <a class="top-action-btn top-register" href="<?php echo site_url('/my-account/'); ?>">Register</a>
           <?php endif; ?>
         </div>
+        -->
       </div>
     </div>
   </div>

@@ -9,6 +9,12 @@ get_header();
     <h2 class="text-white"><?php echo get_the_title(); ?></h2>
     <div class="overlay"></div>
   </div>
+  <div class="container">
+    <div class="row">
+      <?php get_template_part('template-parts/desktop','ads'); ?>
+    </div>
+  </div>
+
   <div class="container-fluid">
     <div class="row">
 
@@ -25,6 +31,12 @@ get_header();
         <?php require get_template_directory() . '/template-parts/jobs/sidebar.php'; ?>
       </div>
 
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <?php get_template_part('template-parts/desktop','ads'); ?>
     </div>
   </div>
 </div>

@@ -191,7 +191,22 @@ function _get_template_url($templateFileName){
   //print_r($pages);
 }
 
-
+add_action('JEPH_pagination', '_JEPH_pagination', 10, 2);
+function _JEPH_pagination( $total_pages, $paged){
+  echo '<div class="jobseeker-pagination-wrapper">';
+  echo paginate_links( array(
+      'base' => str_replace( 99999, '%#%', esc_url( get_pagenum_link( 99999 ) ) ), // the base URL, including query arg
+      'format' => '/%#%/', // this defines the query parameter that will be used, in this case "p"
+      'prev_text' => __('&laquo; Previous'), // text for previous page
+      'next_text' => __('Next &raquo;'), // text for next page
+      'total' => $total_pages, // the total number of pages we have
+      'current' => $paged, // the current page
+      'end_size' => 1,
+      'mid_size' => 2,
+      'type' => 'list'
+  ));
+  echo '</div>';
+}
 
 
 
