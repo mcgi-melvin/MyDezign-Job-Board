@@ -125,7 +125,9 @@ table { table-layout: fixed; }
 #JEPH_featured time, #JEPH_featured .salary, #JEPH_featured .company,
 #JEPH_joblist_loop time, #JEPH_joblist_loop .salary,
 #JEPH_joblist_loop .company { font-size: 12px; color: #a0a0a0; }
-#JEPH_featured .ApplyNow a { display: inline-block;; }
+#JEPH_featured .ApplyNow a { display: inline-block; }
+#JEPH_featured .jobseeker-pagination-wrapper { display: none; }
+
 
 #JEPH_CTA { background-color: white; padding-top: 100px; padding-bottom: 100px; }
 #JEPH_CTA .cta-text,

@@ -111,7 +111,7 @@ function _joblist_loop(){
     </tr>
     </tbody>
   </table>
-  <p><?php echo substr(get_the_content(), 0, 200); ?></p>
+  <p><?php echo substr(sanitize_text_field(get_the_content()), 0, 200); ?></p>
   <div class="ApplyNow text-center mt-5 mb-3">
     <a class="theme_button text-uppercase" href="<?php echo !empty($meta['_company_website'][0]) ? $meta['_company_website'][0] : get_permalink(); ?>">Apply Now</a>
   </div>
@@ -130,7 +130,10 @@ function _getJobList($args = [], $class, $onPagi = 1){ // TODO ON/OFF pagination
       do_action('joblist_loop');
       do_action('JEPH_loop_end');
     endwhile;
-    do_action('JEPH_pagination', $total_pages, $args['paged']);
+    if($onPagi = 1){
+      do_action('JEPH_pagination', $total_pages, $args['paged']);
+    }
+
     wp_reset_postdata();
   else:
     echo 'No Results Found';

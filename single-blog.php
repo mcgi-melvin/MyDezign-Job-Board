@@ -1,8 +1,8 @@
 <?php
 get_header();
-global $post;
 
-if (have_posts()) : while (have_posts()) : the_post();
+if (have_posts()):
+  while (have_posts()) : the_post();
 ?>
 
 
@@ -20,7 +20,7 @@ if (have_posts()) : while (have_posts()) : the_post();
       </div>
       <div class="col-12 col-md-12 col-lg-4">
         <div class="single-sidebar">
-          <?php dynamic_sidebar('single_job_list_1'); ?>
+          <?php dynamic_sidebar('primary_sidebar'); ?>
         </div>
       </div>
     </div>
@@ -35,7 +35,8 @@ if (have_posts()) : while (have_posts()) : the_post();
 
 
 <?php
-endwhile;
+  endwhile;
+  wp_reset_postdata();
 endif;
 
 get_footer(); ?>

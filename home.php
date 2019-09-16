@@ -22,7 +22,8 @@ if ( $the_query->have_posts() ) :
 	echo '<hr />';
 	echo '<div class="row">';
 	echo '<div class="col-md-8 col-12" style="border-right: 1px solid #d7d7d7;">';
-	while ( $the_query->have_posts() ) : $the_query->the_post();
+	while ( $the_query->have_posts() ) :
+		$the_query->the_post();
 ?>
 
 		<div class="loop-blog-single">
@@ -72,7 +73,7 @@ if ( $the_query->have_posts() ) :
 	<?php
 		echo '</div>
 			<div class="col-md-4 col-12">';
-				echo 	dynamic_sidebar('primary_sidebar');
+				dynamic_sidebar('primary_sidebar');
 			echo '</div>';
 		echo '</div>';
 	echo '</div>'; //end row

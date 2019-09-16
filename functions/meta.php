@@ -3,7 +3,7 @@
 add_action('wp_head','keywords_and_desc');
 function keywords_and_desc(){
   global $post;
-  /* GOOGLE ANALYTICS */
+  /* GOOGLE ADS & ANALYTICS */
   echo '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <script>
         (adsbygoogle = window.adsbygoogle || []).push({
@@ -11,6 +11,13 @@ function keywords_and_desc(){
             enable_page_level_ads: true
         });
         </script>';
+  echo "<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-126698192-1');
+        </script>";
   /* MAILCHIMP POPUP FORM*/
   echo '<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
   <script type="text/javascript">

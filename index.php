@@ -1,9 +1,8 @@
 <?php
 get_header();
-if(!!is_front_page()){
-  $post = get_post(get_the_ID());
-  $content = apply_filters('the_content', $post->post_content);
-}
+
+if (have_posts()):
+  while (have_posts()) : the_post();
 ?>
 
 <div class="index-main">
@@ -19,7 +18,7 @@ if(!!is_front_page()){
         <?php the_post_thumbnail('large', array( 'class' => 'img-post' )); ?>
       </div>
       <div class="content">
-        <?php echo $content; ?>
+        <?php echo get_the_content(); ?>
       </div>
 
     </div>
@@ -33,4 +32,7 @@ if(!!is_front_page()){
 
 
 <?php
+  endwhile;
+  wp_reset_postdata();
+endif;
 get_footer();

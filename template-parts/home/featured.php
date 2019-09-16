@@ -18,7 +18,7 @@
         ),
         'paged' => 1
       );
-      do_action('getJobList', $args, __( 'col-md-4 featured', 'textdomain' ), 0);
+      do_action('getJobList', $args, __( 'col-md-4 featured mt-3', 'textdomain' ), 0);
       ?>
 
 
