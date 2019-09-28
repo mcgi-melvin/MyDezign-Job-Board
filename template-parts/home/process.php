@@ -1,6 +1,6 @@
 <div id="JEPH_process">
-  <div class="row text-center">
 
+  <div class="row text-center no-ads">
     <div class="col-md-6 d-flex align-items-center justify-content-center" style="background-color: white;">
       <a href="#">
       <div class="icon-container">
@@ -20,6 +20,9 @@
         <?php endif; ?>
       </div>
     </div>
+  </div>
+
+  <div class="row text-center no-ads">
     <div class="col-md-6 d-flex align-items-center justify-content-center flex-column-reverse" style="background-color: #183c40;">
       <div class="info-container text-white">
         <?php if( get_field('JEPH_process')['JEPH_process_2']['title'] ): ?>
@@ -39,6 +42,9 @@
       </div>
       </a>
     </div>
+  </div>
+
+  <div class="row text-center no-ads">
     <div class="col-md-6 d-flex align-items-center justify-content-center">
       <a href="#">
       <div class="icon-container">
@@ -58,6 +64,6 @@
         <?php endif; ?>
       </div>
     </div>
-
   </div>
+
 </div>

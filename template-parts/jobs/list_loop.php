@@ -2,9 +2,22 @@
   <?php
   $paged = get_query_var( 'paged' ) ? get_query_var( 'paged', 1 ) : 1;
   $q = isset($_GET['q']) ? sanitize_text_field($_GET['q']) : '';
-  $address = isset($_GET['job_address']) ? sanitize_text_field($_GET['job_address']) : '';
-  $salary = isset($_GET['job_salary']) ? sanitize_text_field($_GET['job_salary']) : '';
-  $salary = $salary === "" ? array(0,999999999) : str_split( str_replace(',', '', $salary), strpos($salary, ',') );
+  if(isset($_GET['job_salary']) && $_GET['job_salary'] !== ""){
+    $salary_query = array(
+          'key' => '_job_salary',
+          'value' => sanitize_text_field($_GET['job_salary']),
+          'compare' => 'BETWEEN',
+          'type' => 'NUMERIC'
+      );
+  } else { $salary_query = array(); }
+  if(isset($_GET['job_address'])){
+    $location_query = array(
+          'key' => '_job_location',
+          'value' => sanitize_text_field($_GET['job_address']),
+          'compare' => 'LIKE',
+      );
+  } else { $location_query = array(); }
+  //$salary = $salary === "" ? array(0,999999999) : explode(',',$salary );
   $post_number = 10;
   $args = array(
     'post_type' => 'job_listing',
@@ -12,20 +25,16 @@
     'paged' => $paged,
     's' => $q,
     'meta_query' => array(
-      'relation' => 'AND',
-      array(
-        'key' => '_job_location',
-        'value' => $address,
-        'compare' => 'LIKE',
-      ),
-      array(
-        'key' => '_job_salary',
-        'value' => $salary,
-        'compare' => 'BETWEEN',
-        'type' => 'NUMERIC'
-      ),
+      $salary_query,
+      $location_query,
     ),
-    'orderby' => '_job_salary',
+    /*
+    'tax_query' => array(
+      'taxonomy'=> 'job_listing_category',
+      'field' => 'slug',
+      'terms' => 'call-center'
+    ),
+    */
   );
   do_action('getJobList', $args, __( 'joblist-wrapper mb-2', 'textdomain' ) ); ?>
 

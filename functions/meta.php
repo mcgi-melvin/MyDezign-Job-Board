@@ -4,8 +4,7 @@ add_action('wp_head','keywords_and_desc');
 function keywords_and_desc(){
   global $post;
   /* GOOGLE ADS & ANALYTICS */
-  echo '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <script>
+  echo '<script>
         (adsbygoogle = window.adsbygoogle || []).push({
             google_ad_client: "ca-pub-3206044396168883",
             enable_page_level_ads: true
@@ -15,7 +14,6 @@ function keywords_and_desc(){
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-
           gtag('config', 'UA-126698192-1');
         </script>";
   /* MAILCHIMP POPUP FORM*/
@@ -47,15 +45,9 @@ function keywords_and_desc(){
           echo '<meta property="twitter:title"  content="'.get_bloginfo('name').' - '. $get_post->post_title .'" />';
         }
 
-        if(get_post_meta(get_the_ID(),'_job_description',true) != ''){
-          echo '<meta content="'.substr(get_post_meta(get_the_ID(),'_job_description',true), 0, 141).'" name="description">';
-          echo '<meta content="'.substr(get_post_meta(get_the_ID(),'_job_description',true), 0, 141).'" property="og:description">';
-          echo '<meta content="'.substr(get_post_meta(get_the_ID(),'_job_description',true), 0, 141).'" property="twitter:description">';
-        }else{
-          echo '<meta content="'.$get_post->post_excerpt.'" name="description">';
-          echo '<meta content="'.$get_post->post_excerpt.'" property="og:description">';
-          echo '<meta content="'.$get_post->post_excerpt.'" property="twitter:description">';
-        }
+
+
+
 
         if(get_post_meta(get_the_ID(),'_application',true) != ''){
           echo '<meta name="contact" content="'.get_post_meta(get_the_ID(),'_application',true).'" />';
@@ -68,18 +60,15 @@ function keywords_and_desc(){
           echo '<meta name="twitter:creator" content="@hanapbuhayph">';
         }
 
-        if(get_the_company_logo() != ""){
-          echo '<meta property="og:image" content="'.get_the_post_thumbnail_url(get_the_ID(), 'full').'" />
-                <meta name="twitter:image" content="'.get_the_post_thumbnail_url(get_the_ID(), 'full').'">';
-        } else {
-          echo '<meta property="og:image" content="'.site_url().'/wp-content/plugins/wp-job-manager/assets/images/company.png" />
-                <meta name="twitter:image" content="'.site_url().'/wp-content/plugins/wp-job-manager/assets/images/company.png">';
-        }
+
 
         echo '<meta property="og:type" content="article" />
               <meta name="robots" content="index, follow">
-              ';
-
+              <meta content="'.substr(strip_tags(get_the_content()), 0, 141).'" name="description">
+              <meta property="og:description" content="'.substr(strip_tags(get_the_content()), 0, 141).'">
+              <meta property="twitter:description" content="'.substr(strip_tags(get_the_content()), 0, 141).'">
+              <meta property="og:image" content="'.site_url().'/wp-content/uploads/2019/09/hiring.jpg" />
+              <meta name="twitter:image" content="'.site_url().'/wp-content/uploads/2019/09/hiring.jpg">';
     }
 
     if(is_home() || is_front_page()){
@@ -99,8 +88,8 @@ function keywords_and_desc(){
     }
 
     echo '<meta property="fb:app_id" content="1468692359850697" />
-          <meta property="og:image:width" content="200px" />
-          <meta property="og:image:height" content="200px" />
+          <meta property="og:image:width" content="200" />
+          <meta property="og:image:height" content="200" />
           <meta property="og:site_name" content="'.get_bloginfo('name').'" />
           <meta property="og:url" content="'.get_permalink().'" />
           <meta name="twitter:site" content="@hanapbuhayph">

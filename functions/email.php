@@ -40,7 +40,7 @@ function genericMCCurl($mailData){
   foreach($response as $d){
 	  $data .= $d. "\n";
   }
-  file_put_contents('logs.txt', $data.PHP_EOL , FILE_APPEND | LOCK_EX);
+  file_put_contents('logs.txt', '['.date().']: '. $data.PHP_EOL , FILE_APPEND | LOCK_EX);
   return $response;
 }
 
@@ -134,7 +134,7 @@ function getLatestJob(){
   $jobData = [];
   $args = array(
 		'post_type'=>'job_listing',
-		'posts_per_page'=>-1,
+		'posts_per_page'=>5,
 		'meta_query' => array(
 			array(
 				'key' => '_featured',

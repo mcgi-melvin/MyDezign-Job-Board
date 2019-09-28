@@ -1,0 +1,37 @@
+/*
+* CSS FOR Candidate
+* CSS FOR Employer
+*
+*/
+
+#users_container .users-section-info { padding-top: 50px; padding-bottom: 50px; }
+#users_container #user_landing nav { border: 2px solid #355e6d; }
+#users_container #user_landing .user-button { display: block; padding: 0.5rem 1rem; color: #445672; }
+#users_container #user_landing .user-button.active {
+  color: white;
+  background-image: linear-gradient(to right, #456672, #6c97a7, #456672);
+}
+#users_container #user_landing {
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
+}
+
+#users_banner {
+  background-size: cover;
+  background-position: center;
+  min-height: 400px;
+  position:relative;
+}
+#users_banner .users-image,
+#users_banner canvas {
+  background-color: transparent;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+}
+#users_banner .users-image { width: 200px; height: 200px; border-radius: 50%; background-color: #616a7f; }

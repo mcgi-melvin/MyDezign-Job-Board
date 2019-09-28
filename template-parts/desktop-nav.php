@@ -21,8 +21,8 @@
         wp_nav_menu(array('theme_location' => 'header-menu','menu' => 'header-menu'));
       }
        ?>
-       <div class="d-flex align-items-center" style="height: 100%;">
-       <a class="user-btn" href="#">
+       <div class="d-flex align-items-center page-users-hover page-<?php echo strtolower(get_the_title()); ?>" style="height: 100%;">
+       <a class="user-btn" href="<?php echo site_url('/'.apply_filters('get_template_url', 'page-users.php')[0]->post_name); ?>" title="My Account">
          <div class="text-center" style="padding: 20px;">
            <i class="fa fa-user" style="font-weight: 100;"></i>
          </div>

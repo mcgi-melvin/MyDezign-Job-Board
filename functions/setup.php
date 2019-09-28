@@ -175,7 +175,7 @@ function slug_get_acf( $object, $field_name, $request ) {
 }
 
 add_filter('show_admin_bar', '__return_false');
-//remove_action( 'shutdown', 'wp_ob_end_flush_all', 1 );
+remove_action( 'shutdown', 'wp_ob_end_flush_all', 1 );
 
 
 add_action('get_template_url', '_get_template_url');
@@ -195,7 +195,7 @@ add_action('JEPH_pagination', '_JEPH_pagination', 10, 2);
 function _JEPH_pagination( $total_pages, $paged){
   echo '<div class="jobseeker-pagination-wrapper">';
   echo paginate_links( array(
-      'base' => str_replace( 99999, '%#%', esc_url( get_pagenum_link( 99999 ) ) ), // the base URL, including query arg
+      'base' => str_replace( 99999, '%#%', html_entity_decode( get_pagenum_link( 99999 ) ) ), // the base URL, including query arg
       'format' => '/%#%/', // this defines the query parameter that will be used, in this case "p"
       'prev_text' => __('&laquo; Previous'), // text for previous page
       'next_text' => __('Next &raquo;'), // text for next page

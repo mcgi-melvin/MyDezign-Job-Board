@@ -5,6 +5,7 @@
         <div class="top-social">
           <ul class="top-icon social-icons">
             <li><a href="//www.facebook.com/ph.hanapbuhay"><i class="fab fa-facebook-square"></i></a></li>
+            <!-- <li><a target="blank" href="//m.me//ph.hanapbuhay"><i class="fab fa-facebook-messenger"></i></a></li> -->
             <li><a href="//twitter.com/HanapBuhayPH"><i class="fab fa-twitter-square"></i></a></li>
             <li><a href="//hanapbuhayPH.blogspot.com"><i class="fab fa-blogger"></i></a></li>
             <li><a href="//www.pinterest.ph/phhanapbuhay/"><i class="fab fa-pinterest-square"></i></i></a></li>

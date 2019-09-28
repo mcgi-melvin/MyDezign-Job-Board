@@ -40,11 +40,12 @@ p { font-size: 14px; }
 table { table-layout: fixed; }
 
 
-#jobemployph_wrapper input,
+#jobemployph_wrapper input:not([type="checkbox"]),
 #jobemployph_wrapper select { outline: none; width: 100%; padding: 10px; margin: 5px 0; border-top: none; border-left: none; border-right: none; }
 #jobemployph_wrapper select,
 #jobemployph_wrapper input[type="text"],
-#jobemployph_wrapper input[type="email"] { border-bottom: 1px solid #78c9e6; }
+#jobemployph_wrapper input[type="email"],
+#jobemployph_wrapper input[type="password"] { border-bottom: 1px solid #78c9e6; }
 #jobemployph_wrapper input[type="submit"] {
   background-image: linear-gradient(to right, #456672, #6c97a7, #456672);
   color: white;
@@ -54,11 +55,11 @@ table { table-layout: fixed; }
 
 
 #header h1.site_title { color: white; }
-#header #menu-main-menu { padding-left: 0; }
-#header .menu li.menu-item, .menu li.page_item{ display: inline-block; padding: 20px; font-size: 13px; }
+#header #menu-main-menu { padding-left: 0; cursor: default; }
+#header .menu li.menu-item, .menu li.page_item{ display: inline-block; padding: 20px 0; font-size: 13px; }
 #header .menu li.menu-item:hover, #header .menu li.page_item:hover,
 #header .menu .current_page_item { background-color: #78c9e6; transition: border 1s ease; }
-#header .menu li.menu-item a, .menu li.page_item a{ color: white; text-decoration: none;}
+#header .menu li.menu-item a, .menu li.page_item a{ color: white; padding: 20px; text-decoration: none;}
 #header .menu li.menu-item-has-children ul.sub-menu { display: none; }
 #header .sub-menu { background-color: white; position: absolute;}
 #header .sub-menu li.menu-item a, .sub-menu li.page_item a { color: #325d6c }
@@ -85,6 +86,7 @@ table { table-layout: fixed; }
   font-size: 14px;
 }
 #header .user-btn { color: white; }
+#header .page-users, #header .page-users-hover:hover { background-color: #78c9e6; }
 
 /* end header style */
 
@@ -116,6 +118,7 @@ table { table-layout: fixed; }
 
 #JEPH_process .row { margin-left: 0; margin-right: 0; }
 #JEPH_process .col-md-6 { height: 600px; }
+#JEPH_process .no-ads .google-auto-placed { display: none; }
 
 #JEPH_featured { padding-top: 100px; padding-bottom: 100px; }
 #JEPH_featured .joblist-container,
@@ -249,19 +252,6 @@ ul.quick-links li{
 
 /* END SINGLE CSS */
 
-/* JOB DASHBOARD CSS */
-.job-dashboard-job-title{text-decoration: none !important;}
-#job-manager-job-dashboard{
-  background-color: #456672;
-  margin: 30px 0;
-  padding: 10px;
-  color: white;
-  box-shadow: -1px 2px 3px black;
-}
-
-
-
-/* END JOBDASHBOARD CSS */
 
 /* JOB LIST CSS */
 
