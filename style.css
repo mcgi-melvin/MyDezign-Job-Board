@@ -120,15 +120,20 @@ table { table-layout: fixed; }
 #JEPH_process .col-md-6 { height: 600px; }
 #JEPH_process .no-ads .google-auto-placed { display: none; }
 
-#JEPH_featured { padding-top: 100px; padding-bottom: 100px; }
+#JEPH_featured { padding-top: 100px; padding-bottom: 100px; background-color: #3e3e3e; }
+#JEPH_featured h2,
+#JEPH_featured p,
+#JEPH_joblist_loop p { color: white; }
+
 #JEPH_featured .joblist-container,
-#JEPH_joblist_loop .joblist-container { background-color: white; padding: 20px; box-shadow: 0 1px 1px rgba(0,0,0,0.05); min-height: 300px; }
+#JEPH_joblist_loop .joblist-container { background-color: #0c254c; padding: 20px; box-shadow: 0 0px 10px rgba(120, 201, 230, 0.25); min-height: 300px; }
 #JEPH_featured h3,
-#JEPH_joblist_loop h3 { font-size: 25px; color: #445672; }
+#JEPH_joblist_loop h3 { font-size: 25px; color: white; }
 #JEPH_featured time, #JEPH_featured .salary, #JEPH_featured .company,
 #JEPH_joblist_loop time, #JEPH_joblist_loop .salary,
 #JEPH_joblist_loop .company { font-size: 12px; color: #a0a0a0; }
-#JEPH_featured .ApplyNow a { display: inline-block; }
+#JEPH_featured .ApplyNow a { display: inline-block; background: transparent; border: 2px solid white; transition: all 0.5s linear; }
+#JEPH_featured .ApplyNow a:hover { background: white; color: rgba(50,74,83,1); }
 #JEPH_featured .jobseeker-pagination-wrapper { display: none; }
 
 
@@ -142,7 +147,7 @@ table { table-layout: fixed; }
 
 #JEPH_joblist { padding-bottom: 20px; }
 #JEPH_joblist .overlay { background: rgba(0,0,0,0.5); position:absolute; width: 100%; height: 100%; top:0; }
-#JEPH_joblist h2 { z-index: 9999; position: relative; }
+#JEPH_joblist h2 { z-index: 3; position: relative; }
 #JEPH_joblist .banner {
   min-height: 50px;
   padding-top: 100px;
@@ -166,7 +171,7 @@ table { table-layout: fixed; }
 footer h3, footer ul a, footer p { color: white; }
 footer{
   padding: 30px 20px;
-  background-color: #78c9e6;
+  background-color: #0c254c;
 }
 ul.quick-links li{
   list-style-type: none;
@@ -315,24 +320,26 @@ body{background-color:#efefefc4 !important;}
 
 /* MOBILE NAV CSS */
 
+.navigation .mobile-head { padding: 20px; }
 .mobile-nav span{padding: 4px 6px;border-radius: 3px;background: #fff;}
 #mobile-nav{color: #456672;}
-#mobile-nav-menu li{list-style-type: none;display: block;}
+#mobile-nav-menu li{ list-style-type: none; display: block !important; }
 #mobile-nav-menu li a{color: #456672;}
 #mobile-nav-menu .current_page_item{border-bottom: 2px solid #456672;}
 #mobile-nav-menu{padding:0}
 .support-toggle p{font-size: 10px;}
 
 .nav-overlay{
-  background-color: #ffffffde;
+  background-color: #0c254c;
   height: 100vh;
-  width: 0%;
+  width: 100%;
   position: fixed;
   right: 0;
   top: 0;
   z-index: 9999;
-  transition: all 1s ease;
+  transition: all 0.5s ease;
   visibility: hidden;
+  opacity: 0;
 }
 
 .mobile-nav-close{
@@ -353,3 +360,12 @@ body{background-color:#efefefc4 !important;}
 }
 
 /* END MOBILE NAV CSS */
+
+/* REPONSIVE CSS */
+
+@media (max-width: 767px){
+  #home_container .home-box{
+    width: 90%;
+    padding: 30px;
+  }
+}

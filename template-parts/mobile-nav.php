@@ -30,7 +30,7 @@
       <div class="nav-overlay">
         <div class="row">
           <div class="col-offset-8 text-right">
-            <span id="mobile-nav-close" class="mobile-nav-close"><i class="fas fa-window-close"></i></span>
+            <span id="mobile-nav-close" class="text-white mobile-nav-close"><i class="fas fa-window-close"></i></span>
           </div>
           <div class="mobile-menu">
             <?php

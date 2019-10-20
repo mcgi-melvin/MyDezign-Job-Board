@@ -9,14 +9,16 @@ window.onload = function(){
     menu_btn.addEventListener('click',show_navigation);
     close_btn.addEventListener('click',hide_navigation);
     function show_navigation(){
-      document.querySelector('.nav-overlay').style.width = "100%";
+      //document.querySelector('.nav-overlay').style.width = "100%";
       document.querySelector('.nav-overlay').style.visibility = "visible";
+      document.querySelector('.nav-overlay').style.opacity = 1;
       document.getElementById('mobile-nav-menu').style.display = "block";
     }
 
     function hide_navigation(){
-      document.querySelector('.nav-overlay').style.width = "0";
+      //document.querySelector('.nav-overlay').style.width = "0";
       document.querySelector('.nav-overlay').style.visibility = "hidden";
+      document.querySelector('.nav-overlay').style.opacity = 0;
       document.getElementById('mobile-nav-menu').style.display = "none";
       document.querySelector('.random-show').style.display = "none";
     }

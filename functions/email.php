@@ -3,7 +3,7 @@
 $mailData = [];
 $mailData['data'] = [];
 $mailData['api_key'] = get_field('MC_api_key','option');
-$mailData['server'] = substr($mailData['api_key'],strpos($mailData['api_key'],'-')+1);;
+$mailData['server'] = substr($mailData['api_key'],strpos($mailData['api_key'],'-')+1);
 $mailData['request'] = ''; // POST, GET, PUT, DELETE
 $mailData['errors'] = ['400','401','403','404','405','414','422','429','500'];
 
@@ -95,7 +95,10 @@ function sendCampaign(){
 function updateTemplate(){
   global $mailData;
   $campaign_id = getLastCampaignID();
-  $jobs = getLatestJob();
+  $jobs = '';
+	if(empty($jobs)){
+		$jobs = getLatestJob();
+	}
   $mailData['request'] = 'PUT';
   $mailData['url'] = 'campaigns/'.$campaign_id['campaignID'].'/content';
   $mailData['data'] = [
@@ -152,8 +155,9 @@ function getLatestJob(){
 
     }
   }
-
-  return $jobData;
+	if (!empty($jobData)){
+		return $jobData;
+	}
 }
 
 

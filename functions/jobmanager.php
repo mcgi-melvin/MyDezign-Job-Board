@@ -75,6 +75,8 @@ function filter_by_salary_field_query_args( $query_args, $args ) {
   return $query_args;
 }
 
+add_filter( 'wpjm_get_job_listing_structured_data', '__return_false' );
+
 add_action('joblist_loop','_joblist_loop');
 function _joblist_loop(){
   $meta = get_post_meta(get_the_ID());
@@ -113,7 +115,7 @@ function _joblist_loop(){
   </table>
   <p><?php echo substr(sanitize_text_field(get_the_content()), 0, 200); ?></p>
   <div class="ApplyNow text-center mt-5 mb-3">
-    <a class="theme_button text-uppercase" href="<?php echo !empty($meta['_company_website'][0]) ? $meta['_company_website'][0] : get_permalink(); ?>">Apply Now</a>
+    <a class="theme_button text-uppercase font-weight-bold" href="<?php echo !empty($meta['_company_website'][0]) ? $meta['_company_website'][0] : get_permalink(); ?>">Apply Now</a>
   </div>
 </div>
 <?php
