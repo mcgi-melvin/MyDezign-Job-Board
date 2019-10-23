@@ -2,9 +2,15 @@
 // Definitions
 // -----------
 
+
 var canvas = document.querySelector('canvas');
-  canvas.width = 1920;
-  canvas.height = 400;
+
+if( canvas = "undefined" ){
+  return false;
+}
+
+canvas.width = 1920;
+canvas.height = 400;
 var context = canvas.getContext('2d');
 var currentFrame = 0;
 var circles = [];
@@ -67,7 +73,7 @@ function render() {
     false
   );
   context.fill();
-  console.log(context);
+  //console.log(context);
   // ----------------
   // Particle circles
   // ----------------

@@ -29,7 +29,7 @@ function genericEventsCurl($data){
 function getEvents(){
   $request = 'GET';
   $data['api_endpoint'] = 'https://www.eventbriteapi.com/search/';
-  genericEventsCurl($data);
+  //genericEventsCurl($data);
 }
 
 
