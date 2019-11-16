@@ -138,12 +138,14 @@ function getLatestJob(){
   $args = array(
 		'post_type'=>'job_listing',
 		'posts_per_page'=>5,
+		/*
 		'meta_query' => array(
 			array(
 				'key' => '_featured',
 				'value' => 1
 			),
 		),
+		*/
 	);
   $query = new WP_Query($args);
   if ( $query->have_posts() ) {
