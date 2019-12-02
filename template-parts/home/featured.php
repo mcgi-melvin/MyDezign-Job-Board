@@ -18,7 +18,7 @@
         ),
         'paged' => 1
       );
-      do_action('getJobList', $args, __( 'col-md-4 featured mt-3', 'JEPH' ), 0);
+      do_action('getJobList', $args, __( 'col-lg-4 col-md-6 featured mt-3', 'JEPH' ), 0);
       ?>
 
 

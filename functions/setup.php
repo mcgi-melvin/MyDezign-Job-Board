@@ -144,14 +144,26 @@ add_action( 'rest_api_init', 'register_api_hooks' );
 function register_api_hooks() {
   register_rest_route( 'myapp/v1', '/login/',
     array(
-      'methods'  => 'GET', 'POST',
+      'methods'  => 'GET',
       'callback' => 'login',
     )
   );
   register_rest_route( 'myapp/v1', '/signup/',
     array(
-      'methods'  => 'GET', 'POST',
+      'methods'  => 'POST',
       'callback' => 'signup',
+    )
+  );
+  register_rest_route( 'fb_chat/v1', '/messenger/',
+    array(
+      'methods'  => 'GET',
+      'callback' => 'chat',
+    )
+  );
+  register_rest_route( 'fb_chat/v1', '/messenger/',
+    array(
+      'methods'  => 'POST',
+      'callback' => 'chat',
     )
   );
 }

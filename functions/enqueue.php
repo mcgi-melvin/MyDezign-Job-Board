@@ -7,6 +7,7 @@ function front_scripts(){
   wp_enqueue_script( 'google-analytics', 'https://www.googletagmanager.com/gtag/js?id=UA-126698192-1', array('jquery') );
   wp_enqueue_script( 'google-adsense', 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', array('jquery') );
   wp_enqueue_script( 'main-script', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), '', true );
+  wp_enqueue_script( 'user-script', get_template_directory_uri() . '/assets/js/users.js', array('jquery'), '', true );
   wp_enqueue_script( 'users-canvas', get_template_directory_uri() . '/assets/js/users-canvas.js', array('jquery'), '', true );
   wp_enqueue_script( 'react', 'https://unpkg.com/react@16/umd/react.production.min.js', array('jquery'), '', true );
   wp_enqueue_script( 'react-dom', 'https://unpkg.com/react-dom@16/umd/react-dom.production.min.js', array('jquery'), '', true );
@@ -16,7 +17,7 @@ function front_scripts(){
   wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.css' );
   wp_enqueue_style( 'fontawesome-all', get_template_directory_uri() . '/assets/css/all.css' );
   wp_enqueue_style( 'woocommerce-custom', get_template_directory_uri() . '/assets/css/woocommerce.css' );
-  wp_enqueue_style( 'calendar-css', get_template_directory_uri() . '/assets/css/calendar.css' );
+  //wp_enqueue_style( 'calendar-css', get_template_directory_uri() . '/assets/css/calendar.css' );
   wp_enqueue_style( 'users-css', get_template_directory_uri() . '/assets/css/users.css' );
   //wp_enqueue_style( 'main-css', get_template_directory_uri() . '/assets/css/style.css' );
 
@@ -25,6 +26,15 @@ function front_scripts(){
   }
 
   include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+  wp_localize_script( 'user-script', 'myAjax',
+    array(
+        'ajaxurl' => admin_url( 'admin-ajax.php'),
+        'site_url' => site_url(),
+        'adminpost' => admin_url( 'admin-post.php' )
+      )
+    );
+  wp_enqueue_script( 'user-script' );
 
   wp_enqueue_script( 'wp-api', get_template_directory_uri() . '/assets/js/api.js' );
   wp_localize_script( 'wp-api', 'wpApiSettings', array(

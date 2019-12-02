@@ -5,10 +5,6 @@
 
 var canvas = document.querySelector('canvas');
 
-if( canvas = "undefined" ){
-  return false;
-}
-
 canvas.width = 1920;
 canvas.height = 400;
 var context = canvas.getContext('2d');

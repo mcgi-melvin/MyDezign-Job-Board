@@ -20,13 +20,11 @@ function JEPH_frontend_login(){
     //print_r($user);
     wp_clear_auth_cookie();
     wp_set_current_user( $user->ID, $user->user_login );
-    if (wp_validate_auth_cookie()==FALSE){
-      wp_set_auth_cookie($user_id);
-    }
+    wp_set_auth_cookie($user->ID);
     do_action( 'wp_login', $user->user_login, $user );
 
     if(is_user_logged_in()){
-      wp_safe_redirect($_SERVER['REQUEST_URI']);
+      wp_safe_redirect($_SERVER['REQUEST_URI'].'/users');
     }
 
   }
@@ -71,7 +69,7 @@ function JEPH_frontend_signup() {
 
 		// this is required for username checks
 		require_once(ABSPATH . WPINC . '/registration.php');
-    $user = get_user_by('login',$user_login);
+    $user = get_user_by('login', $user_login);
 		if(username_exists($user_login)) {
 			// Username already registered
 			JEPH_errors()->add('username_unavailable', __('Username already taken'));
@@ -100,7 +98,7 @@ function JEPH_frontend_signup() {
 			// passwords do not match
 			JEPH_errors()->add('password_mismatch', __('Passwords do not match'));
 		}
-    if($user->roles[0] == 'administrator'){
+    if($user_role == 'administrator'){
       return false;
     }
 		$errors = JEPH_errors()->get_error_messages();

@@ -17,11 +17,6 @@ get_header();
   </div>
   <div class="users-section-info">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-3">
-          Test
-        </div>
-        <div class="col-md-6">
         <?php
           if(is_user_logged_in()):
             require get_template_directory() . '/template-parts/users/dashboard.php';
@@ -29,12 +24,6 @@ get_header();
             require get_template_directory() . '/template-parts/users/landing.php';
           endif;
         ?>
-        </div>
-        <div class="col-md-3">
-          zxc
-        </div>
-
-      </div>
     </div>
   </div>
 

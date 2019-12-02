@@ -29,7 +29,7 @@ $terms = wp_get_object_terms( get_the_ID(), 'job_listing_type' );
     <div class="row">
       <div class="col d-flex align-self-stretch">
         <div class="single-container">
-          <p><?= get_the_content(); ?></p>
+          <p><?= apply_filters('the_content', get_the_content()); ?></p>
         </div>
       </div>
     </div>
@@ -43,7 +43,7 @@ $terms = wp_get_object_terms( get_the_ID(), 'job_listing_type' );
   "@context": "https://schema.org/",
   "@type": "JobPosting",
   "title": "<?php echo get_the_title(); ?>",
-  "description": "<?php echo sanitize_text_field( get_the_content() ); ?>",
+  "description": "<?php echo sanitize_textarea_field( get_the_content() ); ?>",
   "hiringOrganization" : {
     "@type": "Organization",
     "name": "<?php echo isset($meta['_company_name'][0]) && !empty($meta['_company_name'][0]) ? $meta['_company_name'][0] : get_bloginfo('name'); ?>",

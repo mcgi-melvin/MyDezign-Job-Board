@@ -29,7 +29,7 @@ global $post;
 			 * @hooked job_listing_meta_display - 20
 			 * @hooked job_listing_company_display - 30
 			 */
-			do_action( 'single_job_listing_start' );
+			//do_action( 'single_job_listing_start' );
 		?>
 
 		<div class="job_description">

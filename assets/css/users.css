@@ -35,3 +35,30 @@
   background-position: center;
 }
 #users_banner .users-image { width: 200px; height: 200px; border-radius: 50%; background-color: #616a7f; }
+
+/* EMPLOYER PAGE CSS */
+
+#owner_profile_table .table-head { width: 100px; }
+
+.nav .nav-link {
+  background-image: linear-gradient(to right, #456672, #456672, #456672);
+  border-radius: 0;
+  text-align: center;
+  color: white;
+  font-size: 13px;
+}
+.nav .nav-link:hover,
+.nav .nav-link.active { background-image: linear-gradient(to right, #456672, #6c97a7, #456672); border: 1px solid #456672; color: white; }
+
+.employer-messages,
+.employer-joblist { }
+.employer-profiles .tab-content,
+.employer-joblist .tab-content {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  min-height: 400px;
+  word-break: break-word;
+  background-color: white;
+}
+.employer-profiles .table-heading { width: 100px; }
+
+/* END EMPLOYER PAGE CSS */
