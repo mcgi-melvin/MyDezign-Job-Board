@@ -1,155 +1,79 @@
 <?php
 
-add_filter( 'submit_job_form_fields', 'frontend_add_salary_field' );
-function frontend_add_salary_field( $fields ) {
-  $fields['job']['job_salary'] = array(
-    'label'       => __( 'Salary (PHP)', 'job_manager' ),
-    'type'        => 'text',
-    'required'    => true,
-    'placeholder' => 'e.g. 200',
-    'priority'    => 7
-  );
-  return $fields;
-}
-
-add_filter( 'job_manager_job_listing_data_fields', 'admin_add_salary_field' );
-function admin_add_salary_field( $fields ) {
-  $fields['_job_salary'] = array(
-    'label'       => __( 'Salary (PHP)', 'job_manager' ),
-    'type'        => 'text',
-    'placeholder' => 'e.g. 200',
-    'description' => ''
-  );
-  return $fields;
-}
-
-add_action( 'single_job_listing_meta_end', 'display_job_salary_data' );
-function display_job_salary_data() {
-  global $post;
-
-  $salary = get_post_meta( $post->ID, '_job_salary', true );
-
-  if ( $salary ) {
-    echo '<li>' . __( 'Salary:' ) . ' PHP' . esc_html( $salary ) . '</li>';
+add_action('wp_ajax_jeph_add_job','_jeph_add_job');
+add_action('wp_ajax_nopriv_jeph_add_job','_jeph_add_job');
+function _jeph_add_job(){
+  if ( ! isset( $_POST['submit_job'] ) || ! wp_verify_nonce( $_POST['submit_job'], 'jeph_add_job' ) ) {
+    print 'Something Went Wrong';
+    exit;
   }
-}
 
-// SALARY SEARCH FUNCTION
-add_filter( 'job_manager_get_listings', 'filter_by_salary_field_query_args', 10, 2 );
-function filter_by_salary_field_query_args( $query_args, $args ) {
-  if ( isset( $_POST['form_data'] ) ) {
-    parse_str( $_POST['form_data'], $form_data );
-    // If this is set, we are filtering by salary
-    if ( ! empty( $form_data['filter_by_salary'] ) ) {
-      $selected_range = sanitize_text_field( $form_data['filter_by_salary'] );
-      switch ( $selected_range ) {
-        case 'upto20' :
-          $query_args['meta_query'][] = array(
-            'key'     => '_job_salary',
-            'value'   => '200',
-            'compare' => '<',
-            'type'    => 'NUMERIC'
-          );
-        break;
-        case 'over60' :
-          $query_args['meta_query'][] = array(
-            'key'     => '_job_salary',
-            'value'   => '600',
-            'compare' => '>=',
-            'type'    => 'NUMERIC'
-          );
-        break;
-        default :
-          $query_args['meta_query'][] = array(
-            'key'     => '_job_salary',
-            'value'   => array_map( 'absint', explode( '-', $selected_range ) ),
-            'compare' => 'BETWEEN',
-            'type'    => 'NUMERIC'
-          );
-        break;
-      }
-      // This will show the 'reset' link
-      add_filter( 'job_manager_get_listings_custom_filter', '__return_true' );
-    }
+  if (session_status() == PHP_SESSION_NONE) {
+    session_start();
   }
-  return $query_args;
-}
 
-add_filter( 'wpjm_get_job_listing_structured_data', '__return_false' );
+  $_SESSION['message_response'] = 'Something Went Wrong!';
 
-add_action('joblist_loop','_joblist_loop');
-function _joblist_loop(){
-  $meta = get_post_meta(get_the_ID());
-?>
-<div class="joblist-container">
-  <a href="<?php echo get_the_permalink(); ?>">
-    <h3><?php echo get_the_title(); ?></h3>
-  </a>
-  <table class="table table-borderless">
-    <tbody>
-    <tr>
-      <td>
-        <time><i class="fa fa-calendar" style="font-weight: 100;"></i> <?php echo get_the_date(); ?></time>
-      </td>
-      <td>
-        <?php if(!empty($meta['_job_salary'][0])): ?>
-          <div class="salary"><i class="fa fa-coins"></i> <?php echo $meta['_job_salary'][0]; ?></div>
-        <?php endif; ?>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <?php if(!empty($meta['_company_name'][0])): ?>
-          <a href="<?php echo !empty($meta['_company_website'][0]) ? $meta['_company_website'][0] : '#'; ?>">
-            <div class="company"><i class="fa fa-building"></i> <?php echo $meta['_company_name'][0]; ?></div>
-          </a>
-        <?php endif ?>
-      </td>
-      <td>
-        <?php if(!empty($meta['_job_location'][0])): ?>
-          <div class="company"><i class="fa fa-globe-asia"></i> <?php echo $meta['_job_location'][0]; ?></div>
-        <?php endif ?>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <p><?php echo substr(sanitize_text_field(get_the_content()), 0, 200); ?></p>
-  <div class="ApplyNow text-center mt-5 mb-3">
-    <a class="theme_button text-uppercase font-weight-bold" href="<?php echo !empty($meta['_company_website'][0]) ? $meta['_company_website'][0] : get_permalink(); ?>">Apply Now</a>
-  </div>
-</div>
-<?php
-}
+  $referrer = isset( $_POST['_wp_http_referer'] ) ? removeParam( sanitize_text_field( $_POST['_wp_http_referer'] ), 'job_submitted' ) : '' ;
 
-add_action('getJobList','_getJobList', 10, 2);
-function _getJobList($args = [], $class, $onPagi = 1){ // TODO ON/OFF pagination
-  $the_query = new WP_Query( $args );
-  if ( $the_query->have_posts() ) :
-    $total_pages = ceil( $the_query->found_posts / 10 );
-    while ( $the_query->have_posts() ) :
-      $the_query->the_post();
-      do_action('JEPH_loop_start',__( $class, 'jobemployph' ));
-      do_action('joblist_loop');
-      do_action('JEPH_loop_end');
-    endwhile;
-    if($onPagi = 1){
-      do_action('JEPH_pagination', $total_pages, $args['paged']);
+  $job_title = sanitize_text_field( $_POST['job_title'] );
+  $job_salary = sanitize_text_field( $_POST['salary'] );
+  $job_location = sanitize_text_field( $_POST['job_location'] );
+  $job_type = (int)$_POST['job_type'];
+  $job_category = (int)$_POST['job_category'];
+  $job_description = wp_kses_post( $_POST['job_description'] );
+
+  $application_email = sanitize_email( $_POST['application_email'] );
+  $mobile_number = sanitize_text_field( $_POST['mobile_number'] );
+  $telephone_number = sanitize_text_field( $_POST['telephone_number'] );
+  $application_form = esc_url_raw( $_POST['application_form'] );
+
+  $company_name = sanitize_text_field( $_POST['company_name'] );
+  $company_website = esc_url_raw( $_POST['company_website'] );
+
+  $author_id = isset( $_POST['author'] ) ? (int)Cryptor::decrypt( $_POST['author'] ) : 0;
+
+  $post_name = str_replace( '/[^a-zA-Z0-9]/', '-', strtolower( $job_title ) );
+  
+  if( !empty( $company_name ) ) {
+    $post_name .= "-" . str_replace( '/[^a-zA-Z0-9]/', '-', strtolower( $company_name ) );
+  }
+
+  $job_id = wp_insert_post([
+    'post_type'     =>  'job_listing',
+    'post_title'    =>  $job_title,
+    'post_name'     =>  $post_name . '-' . uniqid(),
+    'post_author'   =>  $author_id,
+    'post_content'  =>  $job_description,
+    //'post_status'   =>  'publish'
+  ]);
+  if( !is_wp_error( $job_id ) ):
+
+    update_field( '_job_location', $job_location, $job_id );
+    update_field( '_application', $application_email, $job_id );
+    update_field( '_job_salary', $job_salary, $job_id );
+    update_field( 'HB_mobile_number', $mobile_number, $job_id );
+    update_field( 'HB_telephone_number', $telephone_number, $job_id );
+    update_field( 'application_form_link', $application_form, $job_id );
+    update_field( '_company_name', $company_name, $job_id );
+    update_field( '_company_website', $company_website, $job_id );
+    
+    /**
+     * Set Taxonomy for the post
+     */
+    wp_set_object_terms( $job_id, array( $job_type ), 'job_listing_type' );
+    wp_set_object_terms( $job_id, $job_category, 'job_listing_category' );
+
+    if ( wp_redirect( $referrer . '/?job_submitted=success' ) ) {
+      $_SESSION['message_response'] = 'Job Added Successfully';
+      exit;
     }
-
-    wp_reset_postdata();
-  else:
-    echo 'No Results Found';
   endif;
-}
 
-add_action('JEPH_loop_start','_loop_start');
-function _loop_start($class){
-  echo '<div class="'.$class.'">';
-}
+  if ( wp_redirect( $referrer . '/?job_submitted=failed' ) ) {
+    exit;
+  }
 
-add_action('JEPH_loop_end','_loop_end');
-function _loop_end(){
-  echo '</div>';
 }
 
 

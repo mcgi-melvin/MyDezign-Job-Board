@@ -17,7 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $job_manager;
 ?>
-<div class="container" style="margin-top: 30px;margin-top: 30px;background: white;border-radius: 5px;padding: 20px;">
 <form action="<?php echo esc_url( $action ); ?>" method="post" id="submit-job-form" class="job-manager-form" enctype="multipart/form-data">
 
 	<?php
@@ -80,8 +79,8 @@ global $job_manager;
 				<input type="hidden" name="job_manager_form" value="<?php echo esc_attr( $form ); ?>" />
 				<input type="hidden" name="job_id" value="<?php echo esc_attr( $job_id ); ?>" />
 				<input type="hidden" name="step" value="<?php echo esc_attr( $step ); ?>" />
-				<input type="button" class="button top-action-btn" id="show_company_info" value="Company Details" />
-				<input type="submit" name="submit_job" class="button top-action-btn" value="<?php echo esc_attr( $submit_button_text ); ?>" />
+				<input type="button" class="button button-orange top-action-btn" id="show_company_info" value="Company Details" />
+				<input type="submit" name="submit_job" class="button button-green top-action-btn" value="<?php echo esc_attr( $submit_button_text ); ?>" />
 				<span class="spinner" style="background-image: url(<?php echo esc_url( includes_url( 'images/spinner.gif' ) ); ?>);"></span>
 			</p>
 		<?php else : ?>
@@ -90,4 +89,3 @@ global $job_manager;
 
 	<?php endif; ?>
 </form>
-</div>

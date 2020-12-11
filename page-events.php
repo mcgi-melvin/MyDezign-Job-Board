@@ -1,8 +1,4 @@
-<?php
-/* Template Name: Events Page */
-
-get_header();
-?>
+<?php get_header(); ?>
 
 
 <div id="events_page" class="events-page">

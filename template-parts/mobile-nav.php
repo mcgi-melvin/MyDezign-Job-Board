@@ -6,7 +6,7 @@
       $custom_logo_id = get_theme_mod( 'custom_logo' );
       $logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
       if ( has_custom_logo() ) {
-              echo '<a href="'.site_url().'"><img width="50px" height="auto" src="' . esc_url( $logo[0] ) . '" alt="' . get_bloginfo( 'name' ) . '"></a>';
+              echo '<a href="'.site_url().'"><img height="auto" src="' . esc_url( $logo[0] ) . '" alt="' . get_bloginfo( 'name' ) . '"></a>';
       } else {
               echo '<h1>'. get_bloginfo( 'name' ) .'</h1>';
       }
@@ -16,11 +16,11 @@
     <div class="col-6 custom-v-align">
 
       <div class="mobile-nav text-right">
-        <a href="<?php echo site_url('post-a-job'); ?>">
-          <span><i title="Start Hiring" class="fas fa-user-plus text-dark"></i></span>
+        <a href="/jobs/add">
+          <span><i title="Start Hiring" class="fas fa-user-plus color-white"></i></span>
         </a>
-        <a href="<?php echo site_url('my-account'); ?>">
-          <span><i title="My Account" class="fas fa-user text-dark"></i></span>
+        <a href="">
+          <span><i title="My Account" class="fas fa-user color-white"></i></span>
         </a>
         <a id="mobile-nav" href="#">
           <span><i title="Open Navigation" class="fas fa-bars"></i></span>
@@ -34,11 +34,11 @@
           </div>
           <div class="mobile-menu">
             <?php
-            if(is_user_logged_in()){
-              wp_nav_menu(array('theme_location' => 'login-header-menu','menu' => 'login-header-menu','menu_id'=>'mobile-nav-menu'));
-            }else{
-              wp_nav_menu(array('theme_location' => 'header-menu','menu' => 'header-menu','menu_id'=>'mobile-nav-menu'));
-            }
+              wp_nav_menu(array(
+                'theme_location' => 'mobile-menu',
+                'menu' => 'header-menu',
+                'menu_id'=>'mobile-nav-menu'
+              ));
              ?>
              <div class="mobile-nav-support random-show" style="display: none;">
                <?php get_template_part('template-parts/toggle/donation','toggle'); ?>

@@ -1,9 +1,4 @@
-<?php
-/*
-  Template Name: Front Page
-*/
-get_header();
-?>
+<?php get_header(); ?>
 <main>
 <div class="body-content container">
   <div class="row">

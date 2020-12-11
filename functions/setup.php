@@ -1,8 +1,5 @@
 <?php
 
-register_nav_menu('header-menu',__( 'Not Logged In Header Menu', 'Menu for Logout User'));
-register_nav_menu('login-header-menu',__( 'Login Header Menu', 'Menu for Logged in User' ));
-
 add_theme_support( 'woocommerce' );
 add_theme_support( 'custom-logo', array(
     'height'      => 100,
@@ -12,47 +9,6 @@ add_theme_support( 'custom-logo', array(
     'header-text' => array( 'site-title', 'site-description'),
     )
 );
-
-add_action( 'init', 'events_post_init' );
-/**
- * Add Custom Post Type Events
- */
-function events_post_init() {
-	$labels = array(
-		'name'               => _x( 'Events', 'post type general name', 'hanap-buhay' ),
-		'singular_name'      => _x( 'Event', 'post type singular name', 'hanap-buhay' ),
-		'menu_name'          => _x( 'Events', 'admin menu', 'hanap-buhay' ),
-		'name_admin_bar'     => _x( 'Event', 'add new on admin bar', 'hanap-buhay' ),
-		'add_new'            => _x( 'Add New', 'event', 'hanap-buhay' ),
-		'add_new_item'       => __( 'Add New Event', 'hanap-buhay' ),
-		'new_item'           => __( 'New Event', 'hanap-buhay' ),
-		'edit_item'          => __( 'Edit Event', 'hanap-buhay' ),
-		'view_item'          => __( 'View Event', 'hanap-buhay' ),
-		'all_items'          => __( 'All Events', 'hanap-buhay' ),
-		'search_items'       => __( 'Search Events', 'hanap-buhay' ),
-		'parent_item_colon'  => __( 'Parent Events:', 'hanap-buhay' ),
-		'not_found'          => __( 'No Events found.', 'hanap-buhay' ),
-		'not_found_in_trash' => __( 'No Events found in Trash.', 'hanap-buhay' )
-	);
-
-	$args = array(
-		'labels'             => $labels,
-		'description'        => __( 'Description.', 'hanap-buhay' ),
-		'public'             => true,
-		'publicly_queryable' => true,
-		'show_ui'            => true,
-		'show_in_menu'       => true,
-		'query_var'          => true,
-		'rewrite'            => array( 'slug' => 'event' ),
-		'capability_type'    => 'post',
-		'has_archive'        => true,
-		'hierarchical'       => false,
-		'menu_position'      => null,
-		'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
-	);
-
-	register_post_type( 'event', $args );
-}
 
 add_action( 'widgets_init', '_widgets_init' );
 function _widgets_init() {
@@ -128,46 +84,46 @@ function my_theme_register_required_plugins() {
 }
 
 // Add custom post type to rest api
-add_action( 'init', 'my_custom_post_type_rest_support', 25 );
-function my_custom_post_type_rest_support() {
+add_action( 'init', 'site_function_init', 25 );
+function site_function_init() {
 	global $wp_post_types;
-	$post_type_name = 'job_listing';
+  $post_type_name = 'job_listing';
+  
 	if( isset( $wp_post_types[ $post_type_name ] ) ) {
 	$wp_post_types[$post_type_name]->show_in_rest = true;
 	// Optionally customize the rest_base or controller class
 	$wp_post_types[$post_type_name]->rest_base = $post_type_name;
 	$wp_post_types[$post_type_name]->rest_controller_class = 'WP_REST_Posts_Controller';
-	}
+  }
+  
+  register_post_status( 'unsubscribe', array(
+      'label'                     => _x( 'Unsubscribe', 'job_listing' ),
+      'public'                    => true,
+      'exclude_from_search'       => false,
+      'show_in_admin_all_list'    => true,
+      'show_in_admin_status_list' => true,
+      'label_count'               => _n_noop( 'Unsubscribe <span class="count">(%s)</span>', 'Unread <span class="count">(%s)</span>' ),
+  ) );
+
+  register_nav_menu( 'desktop-menu', __( 'Desktop Menu' ) );
+  register_nav_menu( 'mobile-menu', __( 'Mobile Menu' ) );
+  register_nav_menu( 'header-menu', __( 'Not Logged In Header Menu', 'Menu for Logout User') );
+  register_nav_menu( 'login-header-menu', __( 'Login Header Menu', 'Menu for Logged in User' ) );
+
+  remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+  remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+  remove_action( 'wp_print_styles', 'print_emoji_styles' );
+  remove_action( 'admin_print_styles', 'print_emoji_styles' ); 
+  remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+  remove_filter( 'comment_text_rss', 'wp_staticize_emoji' ); 
+  remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+  add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
+  add_filter( 'wp_resource_hints', 'disable_emojis_remove_dns_prefetch', 10, 2 );
+
 }
 
-add_action( 'rest_api_init', 'register_api_hooks' );
-function register_api_hooks() {
-  register_rest_route( 'myapp/v1', '/login/',
-    array(
-      'methods'  => 'GET',
-      'callback' => 'login',
-    )
-  );
-  register_rest_route( 'myapp/v1', '/signup/',
-    array(
-      'methods'  => 'POST',
-      'callback' => 'signup',
-    )
-  );
-  register_rest_route( 'fb_chat/v1', '/messenger/',
-    array(
-      'methods'  => 'GET',
-      'callback' => 'chat',
-    )
-  );
-  register_rest_route( 'fb_chat/v1', '/messenger/',
-    array(
-      'methods'  => 'POST',
-      'callback' => 'chat',
-    )
-  );
-}
-/* ADDING ACF INTO REST API */
+
+/* ADDING ACF INTO REST API 
 add_action( 'rest_api_init', 'slug_register_acf' );
 function slug_register_acf() {
   $post_types = get_post_types(['public'=>true], 'names');
@@ -185,6 +141,7 @@ function slug_register_acf() {
 function slug_get_acf( $object, $field_name, $request ) {
     return get_fields($object[ 'id' ]);
 }
+*/
 
 add_filter('show_admin_bar', '__return_false');
 remove_action( 'shutdown', 'wp_ob_end_flush_all', 1 );
@@ -205,24 +162,61 @@ function _get_template_url($templateFileName){
 
 add_action('JEPH_pagination', '_JEPH_pagination', 10, 2);
 function _JEPH_pagination( $total_pages, $paged){
-  echo '<div class="jobseeker-pagination-wrapper">';
+
+  $posts_number = (int)get_option( 'job_manager_per_page' );
+  $offset = ( $paged * 5 ) - ( ($paged * 5) - 2 );
+  $total_pages = ( ($posts_number * $paged * 5) / $posts_number );
+  ?>
+  <div class="jobseeker-pagination-wrapper">
+  <?php
   echo paginate_links( array(
       'base' => str_replace( 99999, '%#%', html_entity_decode( get_pagenum_link( 99999 ) ) ), // the base URL, including query arg
       'format' => '/%#%/', // this defines the query parameter that will be used, in this case "p"
       'prev_text' => __('&laquo; Previous'), // text for previous page
       'next_text' => __('Next &raquo;'), // text for next page
-      'total' => $total_pages, // the total number of pages we have
+      'total' => $paged + 2, // the total number of pages we have
       'current' => $paged, // the current page
       'end_size' => 1,
       'mid_size' => 2,
       'type' => 'list'
   ));
-  echo '</div>';
+  ?>
+  
+  </div>
+  <?php
 }
 
-
-
-
+ /**
+  * Filter function used to remove the tinymce emoji plugin.
+  * 
+  * @param array $plugins 
+  * @return array Difference betwen the two arrays
+  */
+ function disable_emojis_tinymce( $plugins ) {
+  if ( is_array( $plugins ) ) {
+  return array_diff( $plugins, array( 'wpemoji' ) );
+  } else {
+  return array();
+  }
+ }
+ 
+ /**
+  * Remove emoji CDN hostname from DNS prefetching hints.
+  *
+  * @param array $urls URLs to print for resource hints.
+  * @param string $relation_type The relation type the URLs are printed for.
+  * @return array Difference betwen the two arrays.
+  */
+ function disable_emojis_remove_dns_prefetch( $urls, $relation_type ) {
+  if ( 'dns-prefetch' == $relation_type ) {
+  /** This filter is documented in wp-includes/formatting.php */
+  $emoji_svg_url = apply_filters( 'emoji_svg_url', 'https://s.w.org/images/core/emoji/2/svg/' );
+ 
+ $urls = array_diff( $urls, array( $emoji_svg_url ) );
+  }
+ 
+ return $urls;
+ }
 
 
 

@@ -4,16 +4,16 @@
       <div class="col">
         <div class="top-social">
           <ul class="top-icon social-icons">
-            <li><a href="//www.facebook.com/ph.hanapbuhay"><i class="fab fa-facebook-square"></i></a></li>
-            <!-- <li><a target="blank" href="//m.me//ph.hanapbuhay"><i class="fab fa-facebook-messenger"></i></a></li> -->
-            <li><a href="//twitter.com/HanapBuhayPH"><i class="fab fa-twitter-square"></i></a></li>
-            <li><a href="//hanapbuhayPH.blogspot.com"><i class="fab fa-blogger"></i></a></li>
-            <li><a href="//www.pinterest.ph/phhanapbuhay/"><i class="fab fa-pinterest-square"></i></i></a></li>
-            <li><a href="//hanapbuhayph.tumblr.com/"><i class="fab fa-tumblr-square"></i></a></li>
-            <li><a href="//hanapbuhayphilippines.weebly.com/"><i class="fab fa-weebly"></i></a></li>
-            <li><a href="//getpocket.com/@hanapbuhayPH"><i class="fab fa-get-pocket"></i></a></li>
-            <li><a href="//www.reddit.com/user/HanapBuhayPH"><i class="fab fa-reddit-square"></i></a></li>
-            <li><a href="//hanapbuhayph.wordpress.com/"><i class="fab fa-wordpress"></i></a></li>
+            <li><a href="//www.facebook.com/ph.hanapbuhay" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
+            <!-- <li><a target="blank" href="//m.me//ph.hanapbuhay"><i class="fab fa-facebook-messenger"></i></a></li> 
+            <li><a href="//twitter.com/HanapBuhayPH"><i class="fab fa-twitter-square"></i></a></li> -->
+            <li><a href="//hanapbuhayPH.blogspot.com" target="_blank"><i class="fab fa-blogger"></i></a></li>
+            <li><a href="//www.pinterest.ph/phhanapbuhay/" target="_blank"><i class="fab fa-pinterest-square"></i></i></a></li>
+            <li><a href="//hanapbuhayph.tumblr.com/" target="_blank"><i class="fab fa-tumblr-square"></i></a></li>
+            <li><a href="//hanapbuhayphilippines.weebly.com/" target="_blank"><i class="fab fa-weebly"></i></a></li>
+            <li><a href="//getpocket.com/@hanapbuhayPH" target="_blank"><i class="fab fa-get-pocket"></i></a></li>
+            <!--<li><a href="//www.reddit.com/user/HanapBuhayPH" target="_blank"><i class="fab fa-reddit-square"></i></a></li> -->
+            <li><a href="//hanapbuhayph.wordpress.com/" target="_blank"><i class="fab fa-wordpress"></i></a></li>
           </ul>
         </div>
       </div>

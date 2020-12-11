@@ -5,6 +5,12 @@ if (have_posts()):
   while (have_posts()) : the_post();
 ?>
 
+<div id="banner_single" class="banner-single position-relative">
+  <div class="banner-single-info text-center">
+    <h1 class="text-white font-weight-bold"><?php the_title(); ?></h1>
+  </div>
+  <div class="banner-overlay position-absolute"></div>
+</div>
 <div class="index-main">
   <div class="container">
     <div class="row">

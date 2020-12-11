@@ -1,7 +1,4 @@
 <?php
-/*
-  Template Name: Users
-*/
 acf_form_head();
 get_header();
 ?>

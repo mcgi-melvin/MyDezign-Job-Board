@@ -4,32 +4,33 @@ add_action('wp_head','keywords_and_desc');
 function keywords_and_desc(){
   global $post;
   /* GOOGLE ADS & ANALYTICS */
-  echo '<script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-3206044396168883",
-            enable_page_level_ads: true
-        });
-        </script>';
+  
   echo "<script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'UA-126698192-1');
         </script>";
-  /* MAILCHIMP POPUP FORM*/
-  echo '<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
-  <script type="text/javascript">
-  window.dojoRequire(["mojo/signup-forms/Loader"], function(L) {
-    L.start({
-      "baseUrl":"mc.us18.list-manage.com",
-      "uuid":"862c320d356bc193d90253597",
-      "lid":"93de7c249c",
-      "uniqueMethods":true})
-    });
-  </script>';
-
-
-
+      /*
+      echo '<script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-3206044396168883",
+            enable_page_level_ads: true
+        });
+        </script>';
+      
+      MAILCHIMP POPUP FORM
+      echo '<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+      <script type="text/javascript">
+      window.dojoRequire(["mojo/signup-forms/Loader"], function(L) {
+        L.start({
+          "baseUrl":"mc.us18.list-manage.com",
+          "uuid":"862c320d356bc193d90253597",
+          "lid":"93de7c249c",
+          "uniqueMethods":true})
+        });
+      </script>';
+       
 
     if (is_single()){
         $test = get_post_meta(get_the_ID());
@@ -67,8 +68,8 @@ function keywords_and_desc(){
               <meta content="'.substr(strip_tags(get_the_content()), 0, 141).'" name="description">
               <meta property="og:description" content="'.substr(strip_tags(get_the_content()), 0, 141).'">
               <meta property="twitter:description" content="'.substr(strip_tags(get_the_content()), 0, 141).'">
-              <meta property="og:image" content="'.site_url().'/wp-content/uploads/2019/09/hiring.jpg" />
-              <meta name="twitter:image" content="'.site_url().'/wp-content/uploads/2019/09/hiring.jpg">';
+              <meta property="og:image" content="'.site_url().'/wp-content/uploads/2019/12/hiring.jpg" />
+              <meta name="twitter:image" content="'.site_url().'/wp-content/uploads/2019/12/hiring.jpg">';
     }
 
     if(is_home() || is_front_page()){
@@ -95,6 +96,8 @@ function keywords_and_desc(){
           <meta name="twitter:site" content="@hanapbuhayph">
           <meta name="twitter:card" content="summary_large_image">
           <meta name="copyright" content="Copyright (&copy;)2018-'.date("Y").' Hanap Buhay Philippines. All Rights Reserved." />';
+    */
+
 }
 
 ?>

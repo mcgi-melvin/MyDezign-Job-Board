@@ -45,3 +45,4 @@ echo '<div class="support-us text-center"><h3>You love this site? Please support
 echo get_template_part('template-parts/donation','foot').'</div>';
 
 do_action( 'job_manager_job_submitted_content_after', sanitize_title( $job->post_status ), $job );
+?>

@@ -1,5 +1,4 @@
 <?php
-/* Template Name: My Profile */
 acf_form_head(); ?>
 <?php get_header(); ?>
 

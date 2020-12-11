@@ -2,23 +2,26 @@
 //$mailData['api_key'] = '7a1c109ae792a8602b8db8e05ce1c158-us18'; // DUMMY API
 $mailData = [];
 $mailData['data'] = [];
+if( class_exists('acf') )
 $mailData['api_key'] = get_field('MC_api_key','option');
 $mailData['server'] = substr($mailData['api_key'],strpos($mailData['api_key'],'-')+1);
 $mailData['request'] = ''; // POST, GET, PUT, DELETE
 $mailData['errors'] = ['400','401','403','404','405','414','422','429','500'];
 
 /* CRON JOBS */
+/*
 add_action( 'init', function () {
 	if (! wp_next_scheduled ( 'daily_jobs' )) {
 	   wp_schedule_event(time(), 'daily', 'daily_jobs');
 	}
 	add_action('daily_jobs', 'createCampaign');
 });
+*/
 
 function genericMCCurl($mailData){
   // send a HTTP POST request with curl
   $data = json_encode($mailData['data']);
-  $api_endpoint = 'https://'.$mailData['server'].'.api.mailchimp.com/3.0/' . $mailData['url'];
+  $api_endpoint  = 'https://'.$mailData['server'].'.api.mailchimp.com/3.0/' . $mailData['url'];
   $curl = curl_init();
   curl_setopt_array($curl, array(
      CURLOPT_URL => $api_endpoint,
@@ -162,46 +165,54 @@ function getLatestJob(){
 	}
 }
 
+/**
+ * Return Template for welcome message
+ */
 
-add_action('wp_head','test_header');
-function test_header(){
-
-  if(isset($_GET['create_campaign'])){
-    createCampaign();
+function welcome_email_body( $param = [] ){
+  if( empty( $param ) ) {
+    return false;
   }
-
-  if(isset($_GET['get_campaign'])){
-    echo getLastCampaignID();
-  }
-
-  if(isset($_GET['create_template'])){
-    createTemplate();
-  }
-
-  if(isset($_GET['get_template'])){
-    getTemplateID();
-  }
-
-  if(isset($_GET['update_template'])){
-    updateTemplate();
-  }
-
-	if(isset($_GET['get_latest_job'])){
-		getLatestJob();
-	}
+  ob_start();
+  include get_template_directory() . '/template-parts/email/email-welcome-message.php';
+  return ob_get_clean();
 }
 
+/**
+ * Return Template for Applicant Application
+ */
 
+function email_application_from_applicant_exec( $param = [] ) {
+  if( empty( $param ) ) {
+    return false;
+  }
+  ob_start();
+  include get_template_directory() . '/template-parts/email/email-we-send-your-application.php';
+  return ob_get_clean();
+}
 
+/**
+ * Return Template for Application for Employer
+ */
 
+function email_application_to_employer_exec( $param = [] ) {
+  if( empty( $param ) ) {
+    return false;
+  }
+  ob_start();
+  include get_template_directory() . '/template-parts/email/email-send-application.php';
+  return ob_get_clean();
+}
 
+/**
+ * Return Template for Job Update
+ */
 
-
-
-
-
-
-
+function email_job_updates() {
+  ob_start();
+  include get_template_directory() . '/template-parts/email/email-job-update.php';
+  return ob_get_clean();
+}
 
 
 ?>

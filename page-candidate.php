@@ -1,8 +1,4 @@
-<?php
-/* Template Name: Candidate Page */
-get_header();
-
-?>
+<?php get_header(); ?>
 
 <div class="jobseeker-wrapper">
   <div class="container">

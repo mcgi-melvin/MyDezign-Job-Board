@@ -1,3 +1,4 @@
+<!--
 <div class="adsense-auto" style="position: relative; display: block;">
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({
@@ -6,3 +7,4 @@
      });
 </script>
 </div>
+-->

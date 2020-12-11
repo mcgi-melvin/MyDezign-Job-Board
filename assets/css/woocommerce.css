@@ -58,13 +58,13 @@ nav.woocommerce-pagination ul.page-numbers li{
 }
 
 a.page-numbers, span.page-numbers{
-  background-color: #4c6f7c;
-  padding: 5px 10px;
+  background-color: #183c40;
+  padding: 12px 20px;
   color: white;
 }
 
 span.page-numbers.current{
-  background-color: #6892a1;
+  background-color: #dd8041;
 }
 
 ul.wc-tabs{

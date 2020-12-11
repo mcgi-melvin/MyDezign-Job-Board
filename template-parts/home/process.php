@@ -1,69 +1,25 @@
 <div id="JEPH_process">
-
-  <div class="row text-center no-ads">
-    <div class="col-md-6 d-flex align-items-center justify-content-center" style="background-color: white;">
-      <a href="#">
-      <div class="icon-container">
-        <?php if( get_field('JEPH_process')['JEPH_process_1']['icon'] ): ?>
-          <img width="150" src="<?php echo get_field('JEPH_process')['JEPH_process_1']['icon']; ?>">
-        <?php endif; ?>
+  <div class="container">
+  <?php if( get_field('JEPH_process') ): ?>
+    <div class="process-list">
+      <div class="row align-items-center">
+      <?php foreach( get_field( 'JEPH_process' ) as $i => $process ): ?>
+        <div class="col-md-<?= 12 / count( get_field( 'JEPH_process' ) ) ?>">
+          <div class="text-center">
+            <?php if( $process['icon'] ): ?>
+              <img src="<?= $process['icon'] ?>">
+            <?php endif; ?>
+            <?php if( $process['title'] ): ?>
+              <h3><?= $process['title'] ?></h3>
+            <?php endif; ?>
+            <?php if( $process['description'] ): ?>
+              <div><?= $process['description'] ?></div>
+            <?php endif; ?>
+          </div>
+        </div>
+      <?php endforeach; ?>
       </div>
-      </a>
     </div>
-    <div class="col-md-6 d-flex align-items-center justify-content-center" style="background-color: #dd8041;">
-      <div class="info-container text-white">
-        <?php if( get_field('JEPH_process')['JEPH_process_1']['title'] ): ?>
-          <h3 class="font-weight-bold"><?php echo get_field('JEPH_process')['JEPH_process_1']['title']; ?></h3>
-        <?php endif; ?>
-        <?php if( get_field('JEPH_process')['JEPH_process_1']['description'] ): ?>
-          <?php echo get_field('JEPH_process')['JEPH_process_1']['description']; ?>
-        <?php endif; ?>
-      </div>
-    </div>
+  <?php endif; ?>
   </div>
-
-  <div class="row text-center no-ads">
-    <div class="col-md-6 d-flex order-md-1 order-2 align-items-center justify-content-center flex-column-reverse" style="background-color: #183c40;">
-      <div class="info-container text-white">
-        <?php if( get_field('JEPH_process')['JEPH_process_2']['title'] ): ?>
-          <h3 class="font-weight-bold"><?php echo get_field('JEPH_process')['JEPH_process_2']['title']; ?></h3>
-        <?php endif; ?>
-        <?php if( get_field('JEPH_process')['JEPH_process_2']['description'] ): ?>
-          <?php echo get_field('JEPH_process')['JEPH_process_2']['description']; ?>
-        <?php endif; ?>
-      </div>
-    </div>
-    <div class="col-md-6 d-flex order-md-2 order-1 align-items-center justify-content-center flex-column-reverse">
-      <a href="#">
-      <div class="icon-container">
-        <?php if( get_field('JEPH_process')['JEPH_process_2']['icon'] ): ?>
-          <img width="150" src="<?php echo get_field('JEPH_process')['JEPH_process_2']['icon']; ?>">
-        <?php endif; ?>
-      </div>
-      </a>
-    </div>
-  </div>
-
-  <div class="row text-center no-ads">
-    <div class="col-md-6 d-flex align-items-center justify-content-center">
-      <a href="#">
-      <div class="icon-container">
-        <?php if( get_field('JEPH_process')['JEPH_process_3']['icon'] ): ?>
-          <img width="150" src="<?php echo get_field('JEPH_process')['JEPH_process_3']['icon']; ?>">
-        <?php endif; ?>
-      </div>
-      </a>
-    </div>
-    <div class="col-md-6 d-flex align-items-center justify-content-center" style="background-color: #0c254c;">
-      <div class="info-container text-white">
-        <?php if( get_field('JEPH_process')['JEPH_process_3']['title'] ): ?>
-          <h3 class="text-white font-weight-bold"><?php echo get_field('JEPH_process')['JEPH_process_3']['title']; ?></h3>
-        <?php endif; ?>
-        <?php if( get_field('JEPH_process')['JEPH_process_3']['description'] ): ?>
-          <?php echo get_field('JEPH_process')['JEPH_process_3']['description']; ?>
-        <?php endif; ?>
-      </div>
-    </div>
-  </div>
-
 </div>

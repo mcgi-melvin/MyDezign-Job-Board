@@ -20,13 +20,13 @@ global $job_manager;
 
 	<fieldset class="fieldset-logged_in">
 		<label><?php esc_html_e( 'Your account', 'wp-job-manager' ); ?></label>
-		<div class="field account-sign-in">
+		<div class="field account-sign-in d-flex align-items-center justify-content-between">
 			<?php
 				$user = wp_get_current_user();
-				printf( wp_kses_post( __( 'You are currently signed in as <strong>%s</strong>.', 'wp-job-manager' ) ), esc_html( $user->user_login ) );
+				printf( wp_kses_post( __( '<span>You are currently signed in as <strong>%s</strong>.</span>', 'wp-job-manager' ) ), esc_html( $user->user_login ) );
 			?>
 
-			<a class="button" href="<?php echo esc_url( apply_filters( 'submit_job_form_logout_url', wp_logout_url( get_permalink() ) ) ); ?>"><?php esc_html_e( 'Sign out', 'wp-job-manager' ); ?></a>
+			<a class="button button-orange" href="<?php echo esc_url( apply_filters( 'submit_job_form_logout_url', wp_logout_url( get_permalink() ) ) ); ?>"><?php esc_html_e( 'Sign out', 'wp-job-manager' ); ?></a>
 		</div>
 	</fieldset>
 
@@ -39,15 +39,15 @@ global $job_manager;
 	<fieldset class="fieldset-login_required">
 		<label><?php esc_html_e( 'Have an account?', 'wp-job-manager' ); ?></label>
 		<div class="field account-sign-in">
-			<a class="top-action-btn button" href="<?php echo esc_url( apply_filters( 'submit_job_form_login_url', site_url( '/my-account/' ) ) ); ?>"><?php esc_html_e( 'Sign in', 'wp-job-manager' ); ?></a>
+			<a class="top-action-btn button button-orange" href="<?php echo esc_url( apply_filters( 'submit_job_form_login_url', site_url( '/my-account/' ) ) ); ?>"><?php esc_html_e( 'Sign in', 'wp-job-manager' ); ?></a>
 
 			<?php if ( $registration_enabled ) : ?>
-
+				<div>
 				<?php printf( esc_html__( 'If you don\'t have an account you can %screate one below by entering your email address/username.', 'wp-job-manager' ), $account_required ? '' : esc_html__( 'optionally', 'wp-job-manager' ) . ' ' ); ?>
 				<?php if ( $use_standard_password_email ) : ?>
 					<?php printf( esc_html__( 'Your account details will be confirmed via email.', 'wp-job-manager' ) ); ?>
 				<?php endif; ?>
-
+				</div>
 			<?php elseif ( $account_required ) : ?>
 
 				<?php echo wp_kses_post( apply_filters( 'submit_job_form_login_required_message',  __( 'You must sign in to create a new listing.', 'wp-job-manager' ) ) ); ?>
